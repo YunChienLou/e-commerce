@@ -15,7 +15,7 @@
     <Map class="my-3" id="Map"></Map>
     <table class="table">
       <thead>
-        <tr style="color:#cc0000">
+        <tr style="color: #cc0000">
           <th scope="col">#</th>
           <th scope="col">名稱</th>
           <th scope="col">電話</th>

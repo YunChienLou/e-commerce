@@ -6,7 +6,11 @@
       </router-link>
 
       <div class="d-flex">
-        <router-link to="/user/cart" class="nav-link position-relative" :class="{disabled: numCart === 0}">
+        <router-link
+          to="/user/cart"
+          class="nav-link position-relative"
+          :class="{ disabled: numCart === 0 }"
+        >
           <i class="fas fa-shopping-cart"></i>
           <span
             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-teslaRed"
@@ -15,7 +19,11 @@
             <span class="visually-hidden">unread messages</span>
           </span>
         </router-link>
-        <router-link to="/user/myfavs" :class="{disabled:numFavItems === 0}" class="nav-link position-relative">
+        <router-link
+          to="/user/myfavs"
+          :class="{ disabled: numFavItems === 0 }"
+          class="nav-link position-relative"
+        >
           <i class="fas fa-bookmark"></i>
           <span
             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-teslaRed"

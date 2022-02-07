@@ -70,7 +70,7 @@
                   </h1>
                 </div>
                 <div class="row mb-3 mx-2">
-                  <table class="table ">
+                  <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -79,10 +79,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(object,index) in $para.table(item.description)" :key="index">
-                        <th scope="row">{{index+1}}</th>
-                        <td>{{object.title}}</td>
-                        <td>{{object.content}}</td>
+                      <tr
+                        v-for="(object, index) in $para.table(item.description)"
+                        :key="index"
+                      >
+                        <th scope="row">{{ index + 1 }}</th>
+                        <td>{{ object.title }}</td>
+                        <td>{{ object.content }}</td>
                       </tr>
                       <!-- <tr>
                         <th scope="row">2</th>
@@ -123,8 +126,10 @@
                       </button>
                     </div>
                   </div>
-                  <div class="col ">
-                    <h4 class="text-center">NT${{ $filters.currency(item.price) }}</h4>
+                  <div class="col">
+                    <h4 class="text-center">
+                      NT${{ $filters.currency(item.price) }}
+                    </h4>
                   </div>
                 </div>
               </div>

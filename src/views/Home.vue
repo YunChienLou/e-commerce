@@ -206,12 +206,11 @@ export default {
   methods: {
     getProducts() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
-      this.isLoading = true,
-      this.$http.get(url).then((response) => {
-        this.isLoading = false,
-        this.products = response.data.products;
-        console.log("products:", response);
-      });
+      (this.isLoading = true),
+        this.$http.get(url).then((response) => {
+          (this.isLoading = false), (this.products = response.data.products);
+          console.log("products:", response);
+        });
     },
     getProduct(id) {
       this.$router.push(`/user/product/${id}`);

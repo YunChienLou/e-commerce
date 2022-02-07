@@ -127,25 +127,31 @@
             加到購物車 <i class="fas fa-shopping-cart"></i>
           </button>
         </div>
-        
+
         <div class="my-3">
           <h5 class="h5">相關車款</h5>
           <table class="table">
             <tbody>
               <tr v-for="item in filterData" :key="item.id" class="">
                 <th scope="row">
-                  <img class="img-fluid" :src="item.images[0]" style="width:100px" alt="">
+                  <img
+                    class="img-fluid"
+                    :src="item.images[0]"
+                    style="width: 100px"
+                    alt=""
+                  />
                 </th>
-                <td>{{item.title}}</td>
-                <td>{{item.category}}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.category }}</td>
                 <td>
-                  <button type="button" class="btn btn-outline-teslaRed">GO</button>
+                  <button type="button" class="btn btn-outline-teslaRed">
+                    GO
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        
       </div>
     </div>
   </div>
@@ -164,11 +170,11 @@ export default {
       isLoading: false,
       buyInfo:
         "下訂多久後，可以交付車輛？Tesla會通知您預計交車地點與日期，敬請與交付專員確認該日期後的三日區間內何日交付。請注意，以下更改可能會增加您的車輛交付等待時間： 1.修改訂單2.更改付款方式 3.更改車輛登記人。約定好的交付時間可以更改嗎？由於交付日期一經確認後，車輛物流與牌照登記即最後確認，故交車日期確認後不得修改。依據合約內容，最晚何時一定要交車？依據車輛整備狀況的不同，交付顧問會通知您車輛可交付的時間，您須於此時間起一週內前來Tesla 交車，詳細內容請參閱購車合約。交車後 Tesla 的窗口為何？車主服務(包含維修保養)與道路救援請撥打 24 小時免付費專線：0809-007-518。若為新訂單等相關事宜，請聯繫您的車主顧問。",
-      filter:"",
+      filter: "",
     };
   },
-  mixins:[getProducts],
-  computed:{
+  mixins: [getProducts],
+  computed: {
     filterData() {
       // let newData = [];
 
@@ -191,7 +197,7 @@ export default {
         this.isLoading = false;
         if (response.data.success) {
           this.product = response.data.product;
-          this.filter = response.data.product.category
+          this.filter = response.data.product.category;
         }
       });
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="tdContainer">
-    <canvas id="three"> 
+    <canvas id="three">
       <p>555555</p>
     </canvas>
     <div class="hovertitle">
@@ -32,7 +32,13 @@
       </div>
       <div class="ctrl">
         <button id="goInside" class="btn btn-teslaRed">interior</button>
-        <button id="goOutside" class="btn btn-teslaRed" @click="moveCam(30,50,0)">Exterior</button>
+        <button
+          id="goOutside"
+          class="btn btn-teslaRed"
+          @click="moveCam(30, 50, 0)"
+        >
+          Exterior
+        </button>
       </div>
     </div>
   </div>
@@ -43,20 +49,20 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 export default {
-  data(){
-    return{
-      camPos:{
-        x:-400,
-        y:150,
-        z:-400,
+  data() {
+    return {
+      camPos: {
+        x: -400,
+        y: 150,
+        z: -400,
       },
-    }
+    };
   },
   mounted() {
     this.initThree();
   },
   methods: {
-    moveCam(x,y,z){
+    moveCam(x, y, z) {
       this.camPos.x = x;
       this.camPos.y = y;
       this.camPos.z = z;
@@ -80,7 +86,7 @@ export default {
         1500
       );
       // camera.position.y = 100;
-      camera.position.set(this.camPos.x,this.camPos.y, this.camPos.z); // 相機位置
+      camera.position.set(this.camPos.x, this.camPos.y, this.camPos.z); // 相機位置
       camera.lookAt(scene.position); // 相機焦點
       //建立物體模型
       const gltfLoader = new GLTFLoader();
@@ -175,18 +181,17 @@ export default {
         }
       }
       animate();
-      function Cam(){
+      function Cam() {
         const insideCam = document.getElementById("goInside");
-        insideCam.addEventListener("click",()=>{
-          camera.position.set(30,50,30)
+        insideCam.addEventListener("click", () => {
+          camera.position.set(30, 50, 30);
         });
         const outsideCam = document.getElementById("goOutside");
-        outsideCam.addEventListener("click",()=>{
-          camera.position.set(-400,150,-400)
+        outsideCam.addEventListener("click", () => {
+          camera.position.set(-400, 150, -400);
         });
       }
       Cam();
-      
 
       function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;

@@ -32,11 +32,11 @@ app.config.globalProperties.$filters = {
 };
 app.config.globalProperties.$httpMessageState = $httpMessageState;
 //斷句系統
-import { question, paragraph,table } from "./methods/paragraph";
+import { question, paragraph, table } from "./methods/paragraph";
 app.config.globalProperties.$para = {
   question,
   paragraph,
-  table
+  table,
 };
 // 驗證表單
 import { Form, Field, ErrorMessage, defineRule, configure } from "vee-validate";

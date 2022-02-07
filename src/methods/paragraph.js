@@ -10,11 +10,11 @@ export function paragraph(data) {
   return newData;
 }
 
-export function table(data){
+export function table(data) {
   const lists = data.split("。");
-  lists.splice(-1,1);
+  lists.splice(-1, 1);
   const tableArr = [];
-  lists.forEach(element => {
+  lists.forEach((element) => {
     let temp = {};
     console.log(element);
     let splitArr = element.split(":");
