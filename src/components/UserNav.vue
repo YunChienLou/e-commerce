@@ -1,0 +1,137 @@
+<template>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <router-link class="navbar-brand" to="/">
+        <img src="@/assets/logo.svg" alt="logo" width="100" />
+      </router-link>
+
+      <div class="d-flex">
+        <router-link to="/user/cart" class="nav-link position-relative" :class="{disabled: numCart === 0}">
+          <i class="fas fa-shopping-cart"></i>
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-teslaRed"
+          >
+            {{ numCart }}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </router-link>
+        <router-link to="/user/myfavs" :class="{disabled:numFavItems === 0}" class="nav-link position-relative">
+          <i class="fas fa-bookmark"></i>
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-teslaRed"
+          >
+            {{ numFavItems }}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </router-link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          aria-label="Toggle navigation"
+          id="navbarSideCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="offcanvas-collapse navbar-collapse d-flex justify-content-center"
+          id="navbarNavAltMarkup"
+        >
+          <div class="navbar-nav text-center">
+            <div class="row">
+              <div class="col d-lg-flex">
+                <router-link to="/" class="nav-link">Home</router-link>
+                <router-link to="/about" class="nav-link">About</router-link>
+                <router-link to="/user/product" class="nav-link"
+                  >Product</router-link
+                >
+                <router-link to="/contact" class="nav-link"
+                  >Contact</router-link
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <button
+    type="button"
+    class="btn btn-teslaRed btn-floating btn-lg"
+    id="btn-back-to-top"
+    style="position: fixed; bottom: 20px; right: 20px"
+    @click="backTotop"
+  >
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  <!-- <button
+        type="button"
+        class="btn btn-teslaRed btn-floating btn-lg "
+        style="position: fixed ; bottom: 80px ; right: 20px;"
+        >
+    <i class="fas fa-shopping-cart"></i>
+  </button> -->
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      favItems: JSON.parse(localStorage.getItem("favoriteItem")) || [],
+      numCart: 0,
+      cart: {},
+    };
+  },
+  computed: {
+    numFavItems() {
+      return Object.keys(this.favItems).length;
+    },
+  },
+  watch: {
+    cart: {
+      handler: function () {
+        this.numCart = this.cart.carts.length;
+      },
+    },
+  },
+  methods: {
+    getCart() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
+      this.isLoading = true;
+      this.$http.get(url).then((res) => {
+        console.log(res);
+        this.cart = res.data.data;
+        this.isLoading = false;
+      });
+    },
+    backTotop() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    },
+  },
+  created() {
+    this.getCart();
+  },
+  mounted() {
+    document
+      .querySelector("#navbarSideCollapse")
+      .addEventListener("click", function () {
+        document.querySelector(".offcanvas-collapse").classList.toggle("open");
+      });
+    window.onscroll = function () {
+      scrollFunction();
+    };
+    function scrollFunction() {
+      const btn = document.getElementById("btn-back-to-top");
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    }
+  },
+};
+</script>
