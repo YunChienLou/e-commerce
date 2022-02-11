@@ -10,10 +10,11 @@
     </div>
   </Loading>
   <Nav></Nav>
+
   <div class="container">
-    <h1 class="my-3">服務據點</h1>
-    <Map class="my-3" id="Map"></Map>
-    <table class="table">
+    <h1 class="my-3 ob1">服務據點</h1>
+    <Map class="my-3 ob2" id="Map"></Map>
+    <table class="table ob3">
       <thead>
         <tr style="color: #cc0000">
           <th scope="col">#</th>
@@ -50,6 +51,8 @@
 import Nav from "@/components/UserNav.vue";
 import Footer from "@/components/Footer.vue";
 import Map from "@/components/Map.vue";
+import gsap from "gsap";
+// import ScrollTrigger from "gsap/ScrollTrigger";
 
 export default {
   components: {
@@ -57,6 +60,28 @@ export default {
     Footer,
     Map,
   },
+  methods:{
+    // beforeEnter(el){
+    //   console.log("beforeEnter")
+    //   el.style.opacity = 0
+    //   el.style.transform = "translateX(-150px)"
+    // },
+    // enter(el){
+    //   console.log("Enter")
+    //   gsap.to(el,{
+    //     x:0,
+    //     opacity:1,
+    //     duration:3,
+    //     ease: "bounce.out"
+    //   })
+    // }
+  },
+  mounted(){
+    gsap.timeline()
+      .from(".ob1",{x:-500, ease:"expo.out", duration: 1, opacity: 0 })
+      .from('.ob2', {x:-1000, ease:"expo.out", duration: 1, opacity: 0 })
+      .from('.ob3', {x:-500, ease:"expo.out", duration: 1, opacity: 0 })
+  }
 };
 </script>
 <style type="text/css" scoped>

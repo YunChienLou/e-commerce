@@ -11,7 +11,7 @@
         <!--Grid row-->
         <div class="row">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 Tesla" >
             <h6 class="text-uppercase mb-4 font-weight-bold">Tesla Inc</h6>
             <p>
               Ride With Pride.<br />
@@ -24,10 +24,16 @@
           <hr class="w-100 clearfix d-md-none" />
 
           <!-- Grid column -->
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 Company">
             <h6 class="text-uppercase mb-4 font-weight-bold">Company</h6>
             <p>
+              <a class="text-white">Home</a>
+            </p>
+            <p>
               <a class="text-white">About</a>
+            </p>
+            <p>
+              <a class="text-white">Product</a>
             </p>
             <p>
               <a class="text-white">Contact</a>
@@ -38,7 +44,7 @@
           <hr class="w-100 clearfix d-md-none" />
 
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 Products">
             <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
             <p>
               <a class="text-white">SUV</a>
@@ -55,7 +61,7 @@
           <hr class="w-100 clearfix d-md-none" />
 
           <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 Contact">
             <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
             <p><i class="fas fa-home mr-3"></i> New Taipei City, TW</p>
             <p><i class="fas fa-envelope mr-3"></i> TeslaTaiwan@gmail.com</p>
@@ -70,7 +76,7 @@
       <hr class="my-3" />
 
       <!-- Section: Copyright -->
-      <section class="p-3 pt-0">
+      <section class="p-3 pt-0 Copyright">
         <div class="row d-flex align-items-center">
           <!-- Grid column -->
           <div class="col-md-7 col-lg-8 text-center text-md-start">
@@ -124,11 +130,115 @@
   <!-- End of .container -->
 </template>
 <script>
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 export default {
   data() {
     return {
       currentYear: new Date().getFullYear(),
+      // tesla: this.$refs.Tesla
     };
   },
+  methods:{
+    footerAnimate(){
+      ScrollTrigger.matchMedia({
+        "(min-width: 768px)": () => {
+          gsap.from(".Tesla", {
+            scrollTrigger: {
+              trigger: '.Tesla',
+              start: "200px bottom",
+              end: "200px bottom",
+              invalidateOnResize: true,
+              toggleActions: "play none none reverse",
+              markers:true,
+            },
+            y: -200,
+            duration: 1,
+            ease: "power4.out",
+            scale: 0.5,
+          });
+          gsap.from(".Company", {
+            scrollTrigger: {
+              trigger: '.Company',
+              toggleActions: "play none none reverse",
+              invalidateOnResize: true,
+              start: "200px bottom",
+              end: "200px bottom",
+              markers:true,
+            },
+            duration: 1,
+            ease: "power4.out",
+            y: -200,
+            scale: 0.5,
+            delay:0.5,
+          });
+          gsap.from(".Copyright", {
+            scrollTrigger: {
+              trigger: '.Copyright',
+              toggleActions: "play none none reverse",
+              invalidateOnResize: true,
+              start: "200px bottom",
+              end: "200px bottom",
+              markers:true,
+            },
+            duration: 1,
+            ease: "power4.out",
+            y: -400,
+            scale: 0.5,
+            delay: 2,
+          });
+          gsap.from(".Products", {
+            scrollTrigger: {
+              trigger: '.Products',
+              toggleActions: "play none none reverse",
+              invalidateOnResize: true,
+              start: "200px bottom",
+              end: "200px bottom",
+              markers:true,
+            },
+            duration: 1,
+            ease: "power4.out",
+            y: -200,
+            scale: 0.5,
+            delay:1,
+          });
+          gsap.from(".Contact", {
+            scrollTrigger: {
+              trigger: '.Contact',
+              toggleActions: "play none none reverse",
+              invalidateOnResize: true,
+              start: "200px bottom",
+              end: "200px bottom",
+              markers:true,
+            },
+            duration: 1,
+            ease: "power4.out",
+            y: -200,
+            scale: 0.5,
+            delay:1.5,
+          });
+        },
+      });
+
+    }
+  },
+  mounted(){
+    ScrollTrigger.refresh();
+    this.footerAnimate()
+    // gsap.timeline
+    //   .from(".ob1",{x:-500, ease:"expo.out", duration: 1, opacity: 0 })
+    //   .from('.ob2', {x:-1000, ease:"expo.out", duration: 1, opacity: 0 })
+    //   .from('.ob3', {x:-500, ease:"expo.out", duration: 1, opacity: 0 })
+  },
+  unmounted(){
+    const triggers = ScrollTrigger.getAll();
+    triggers.forEach((trigger) => {
+      // 把 ScrollTrigger 綁定的動畫消除
+        trigger.kill();
+      });
+      // 消除綁定 MatchMedia();
+    ScrollTrigger.clearMatchMedia();
+  }
 };
 </script>
