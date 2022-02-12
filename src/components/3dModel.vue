@@ -1,20 +1,19 @@
 <template>
   <div class="tdContainer">
     <canvas id="three">
-      <p>555555</p>
     </canvas>
     <div class="hovertitle">
-      <p class="title h1">Tesla Modal III</p>
+      <p class="title h1 ob1">Tesla Modal III</p>
       <ul class="titleSpecs">
-        <li>
+        <li class="ob2">
           <p class="h4">Range (WLTP)</p>
           <p class="h6">485 KM</p>
         </li>
-        <li>
+        <li class="ob3">
           <p class="h4">Top Speed</p>
           <p class="h6">225 KM/HR</p>
         </li>
-        <li>
+        <li class="ob4">
           <p class="h4">0-100 KM/HR</p>
           <p class="h6">6.1 Sec</p>
         </li>
@@ -48,6 +47,9 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
 export default {
   data() {
     return {
@@ -60,8 +62,70 @@ export default {
   },
   mounted() {
     this.initThree();
+    this.titleAnimation();
   },
   methods: {
+    titleAnimation(){
+      ScrollTrigger.matchMedia({
+        "all":() => {
+          gsap.from(".ob1",{
+            scrollTrigger:{
+              start:"top center",
+              end:"bottom bottom",
+              invalidateOnResize:true,
+              toggleActions: "play none none reverse",
+              markers:true,
+            },
+            x:-400,
+            duration:2,
+            opacity:0,
+            ease: "power4.out",
+          });
+          gsap.from(".ob2",{
+            scrollTrigger:{
+              start:"top center",
+              end:"bottom bottom",
+              invalidateOnResize:true,
+              toggleActions: "play none none reverse",
+              markers:true,
+            },
+            x:-400,
+            duration:2,
+            opacity:0,
+            ease: "power4.out",
+            delay:0.5,
+          });
+          gsap.from(".ob3",{
+            scrollTrigger:{
+              start:"top center",
+              end:"bottom bottom",
+              invalidateOnResize:true,
+              toggleActions: "play none none reverse",
+              markers:true,
+            },
+            x:-400,
+            duration:2,
+            opacity:0,
+            ease: "power4.out",
+            delay: 1,
+          });
+          gsap.from(".ob4",{
+            scrollTrigger:{
+              start:"top center",
+              end:"bottom bottom",
+              invalidateOnResize:true,
+              toggleActions: "play none none reverse",
+              markers:true,
+            },
+            x:-400,
+            duration:2,
+            opacity:0,
+            ease: "power4.out",
+            delay: 1.5,
+          });
+        }
+      })
+    },
     moveCam(x, y, z) {
       this.camPos.x = x;
       this.camPos.y = y;
@@ -178,21 +242,23 @@ export default {
           const canvas = renderer.domElement;
           camera.aspect = canvas.clientWidth / canvas.clientHeight;
           camera.updateProjectionMatrix();
-        }
+        };
+        
       }
       animate();
       function Cam() {
         const insideCam = document.getElementById("goInside");
         insideCam.addEventListener("click", () => {
-          camera.position.set(30, 50, 30);
+          // camera.position.set(30, 50, 30);
+          gsap.to(camera.position,{x:30,y:50,z:30,duration:2,ease:"expo.out"})
         });
         const outsideCam = document.getElementById("goOutside");
         outsideCam.addEventListener("click", () => {
-          camera.position.set(-400, 150, -400);
+          // camera.position.set(-400, 150, -400);
+          gsap.to(camera.position,{x:-400,y:150,z:-400,duration:3,ease:"expo.out"})
         });
       }
       Cam();
-
       function resizeRendererToDisplaySize(renderer) {
         const canvas = renderer.domElement;
         var width = window.innerWidth;

@@ -79,7 +79,7 @@ export default {
   mounted(){
     gsap.timeline()
       .from(".ob1",{x:-500, ease:"expo.out", duration: 1, opacity: 0 })
-      .from('.ob2', {x:-1000, ease:"expo.out", duration: 1, opacity: 0 })
+      .from('.ob2', {x:-1000, ease:"expo.out", duration: 2, opacity: 0 })
       .from('.ob3', {x:-500, ease:"expo.out", duration: 1, opacity: 0 })
   }
 };

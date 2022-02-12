@@ -112,10 +112,17 @@
       <p>Unleash your motor's true potential</p>
     </div>
     <div class="row row-cols-1 row-cols-lg-3">
+      <transition-group
+        :css="false"
+        @before-enter="onBeforeEnter"
+        @enter="onEnter"
+        @leave="onLeave"
+      >
       <div
-        v-for="item in products"
+        v-for="(item,index) in products"
         :key="item.id"
         class="col my-3 position-relative"
+        :data-delay="index"
       >
         <span class="badge bg-teslaRed position-absolute top-0 start-90"
           >10 % OFF</span
@@ -124,6 +131,7 @@
         <h3>{{ item.title }}</h3>
         <span>NT${{ $filters.currency(item.price) }}</span>
       </div>
+      </transition-group>
     </div>
     <button class="btn btn-teslaRed mt-5">View All Products</button>
   </div>
@@ -189,6 +197,9 @@
 import Nav from "@/components/UserNav.vue";
 import Footer from "@/components/Footer.vue";
 import ThreeD from "@/components/3dModel.vue";
+import gsap from "gsap";
+// import ScrollTrigger from "gsap/ScrollTrigger";
+// gsap.registerPlugin(ScrollTrigger);
 
 export default {
   data() {
@@ -215,6 +226,14 @@ export default {
     getProduct(id) {
       this.$router.push(`/user/product/${id}`);
     },
+    onEnter(el, done) {
+      gsap.from(el, {
+        opacity: 0,
+        y:-100,
+        delay: el.dataset.delay * 0.5,
+        onComplete: done
+      })
+    }
   },
   created() {
     console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH);
