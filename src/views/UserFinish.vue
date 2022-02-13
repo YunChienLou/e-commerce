@@ -1,8 +1,8 @@
 <template>
   <Loading :active="isLoading"></Loading>
-  <div class="row text-center">
-    <p>感謝您的購買</p>
-    <p>我們正在準備您的訂單</p>
+  <div class="row text-center mt-5">
+    <h2>感謝您的購買</h2>
+    <h2>我們正在準備您的訂單</h2>
   </div>
   <div class="my-5 row justify-content-center">
     <form class="col-md-6" @submit.prevent="payOrder">
@@ -59,9 +59,9 @@
       </table>
     </form>
   </div>
-  <div class="d-flex justify-content-evenly">
-    <router-link to="/"><button>回到首頁</button></router-link>
-    <router-link to="/user/product"><button>回到車款頁面</button></router-link>
+  <div class="row d-flex justify-content-center mb-3">
+    <router-link class="col-3" to="/"><button class="btn btn-teslaRed form-control">回到首頁</button></router-link>
+    <router-link class="col-3" to="/user/product"><button class="btn btn-teslaRed form-control" >回到車款頁面</button></router-link>
   </div>
 </template>
 <script>

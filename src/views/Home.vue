@@ -116,7 +116,6 @@
         :css="false"
         @before-enter="onBeforeEnter"
         @enter="onEnter"
-        @leave="onLeave"
       >
       <div
         v-for="(item,index) in products"
@@ -198,8 +197,8 @@ import Nav from "@/components/UserNav.vue";
 import Footer from "@/components/Footer.vue";
 import ThreeD from "@/components/3dModel.vue";
 import gsap from "gsap";
-// import ScrollTrigger from "gsap/ScrollTrigger";
-// gsap.registerPlugin(ScrollTrigger);
+import ScrollTrigger from "gsap/ScrollTrigger";
+
 
 export default {
   data() {
@@ -227,12 +226,28 @@ export default {
       this.$router.push(`/user/product/${id}`);
     },
     onEnter(el, done) {
-      gsap.from(el, {
-        opacity: 0,
-        y:-100,
-        delay: el.dataset.delay * 0.5,
-        onComplete: done
+      gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.matchMedia({
+        "all":()=>{
+            gsap.from(el, {
+              scrollTrigger:{
+                trigger: el,
+                start:"100px bottom",
+                end:"+=300",
+                invalidateOnResize:true,
+                toggleActions: "play none none reverse",
+                markers:true,
+              },
+              opacity: 0,
+              y:-100,
+              delay: el.dataset.delay * 0.5,
+              duration:3,
+              ease: "power4.out",
+              onComplete: done
+          })
+        }
       })
+      
     }
   },
   created() {
@@ -351,6 +366,9 @@ export default {
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
   transform-origin: 0 0; /* see note above */
+  background-color: white;
+  z-index: -6;
+  border-radius: 50%;
 }
 .ldio-ei11i0en32 div {
   box-sizing: content-box;

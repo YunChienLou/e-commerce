@@ -79,7 +79,7 @@ export default {
   mounted(){
     gsap.timeline()
       .from(".ob1",{x:-500, ease:"expo.out", duration: 1, opacity: 0 })
-      .from('.ob2', {x:-1000, ease:"expo.out", duration: 2, opacity: 0 })
+      .from('.ob2', {x:-1000, ease:"expo.out", duration: 1, opacity: 0 })
       .from('.ob3', {x:-500, ease:"expo.out", duration: 1, opacity: 0 })
   }
 };
@@ -190,6 +190,9 @@ export default {
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
   transform-origin: 0 0; /* see note above */
+  background-color: white;
+  z-index: -6;
+  border-radius: 50%;
 }
 .ldio-ei11i0en32 div {
   box-sizing: content-box;

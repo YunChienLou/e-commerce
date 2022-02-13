@@ -151,12 +151,13 @@ export default {
               end: "200px bottom",
               invalidateOnResize: true,
               toggleActions: "play none none reverse",
-              markers:true,
+              // markers:true,
             },
             y: -200,
             duration: 1,
             ease: "power4.out",
             scale: 0.5,
+            opacity:0,
           });
           gsap.from(".Company", {
             scrollTrigger: {
@@ -165,13 +166,14 @@ export default {
               invalidateOnResize: true,
               start: "200px bottom",
               end: "200px bottom",
-              markers:true,
+              // markers:true,
             },
             duration: 1,
             ease: "power4.out",
             y: -200,
-            scale: 0.5,
+            // scale: 0.5,
             delay:0.5,
+            opacity:0,
           });
           gsap.from(".Copyright", {
             scrollTrigger: {
@@ -180,13 +182,14 @@ export default {
               invalidateOnResize: true,
               start: "200px bottom",
               end: "200px bottom",
-              markers:true,
+              // markers:true,
             },
             duration: 1,
             ease: "power4.out",
             y: -400,
-            scale: 0.5,
+            // scale: 0.5,
             delay: 2,
+            opacity:0,
           });
           gsap.from(".Products", {
             scrollTrigger: {
@@ -195,13 +198,14 @@ export default {
               invalidateOnResize: true,
               start: "200px bottom",
               end: "200px bottom",
-              markers:true,
+              // markers:true,
             },
             duration: 1,
             ease: "power4.out",
             y: -200,
-            scale: 0.5,
+            // scale: 0.5,
             delay:1,
+            opacity:0,
           });
           gsap.from(".Contact", {
             scrollTrigger: {
@@ -210,13 +214,14 @@ export default {
               invalidateOnResize: true,
               start: "200px bottom",
               end: "200px bottom",
-              markers:true,
+              // markers:true,
             },
             duration: 1,
             ease: "power4.out",
             y: -200,
-            scale: 0.5,
+            // scale: 0.5,
             delay:1.5,
+            opacity:0,
           });
         },
       });

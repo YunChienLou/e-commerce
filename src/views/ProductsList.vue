@@ -47,11 +47,18 @@
           <h4>{{ filter }}</h4>
         </div>
         <div class="mt-5">
+          <transition-group
+            @before-enter="listBeforeEnter"
+            @enter="listEnter"
+            :css="false"
+          >
           <div
             class="card mb-3"
             style="max-width: 900px"
-            v-for="item in filterData"
+            v-for="(item,index) in filterData"
             :key="item.id"
+            :data-index="index"
+            
           >
             <div>
               <img
@@ -87,15 +94,6 @@
                         <td>{{ object.title }}</td>
                         <td>{{ object.content }}</td>
                       </tr>
-                      <!-- <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>@twitter</td>
-                      </tr> -->
                     </tbody>
                   </table>
                 </div>
@@ -135,6 +133,8 @@
               </div>
             </div>
           </div>
+          </transition-group>
+          
         </div>
       </div>
     </div>
@@ -142,6 +142,10 @@
 </template>
 <script>
 import emitter from "@/methods/emitter";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   data() {
     return {
@@ -231,10 +235,53 @@ export default {
       }
       localStorage.setItem("favoriteItem", JSON.stringify(this.favItems));
     },
+    listBeforeEnter(el){
+      el.style.opacity = 0;
+      el.style.transform = "translateY(-300px)";
+    },
+    listEnter(el,done){
+      ScrollTrigger.matchMedia({
+        "all": () => {
+          gsap.registerPlugin(ScrollTrigger);
+          ScrollTrigger.matchMedia({
+            "all":()=>{
+                gsap.to(el, {
+                  scrollTrigger:{
+                    trigger: el,
+                    start:"100px bottom",
+                    end:"+=300",
+                    invalidateOnResize:true,
+                    toggleActions: "play none none reverse",
+                  },
+                  opacity: 1,
+                  y:0,
+                  delay: el.dataset.index * 0.8,
+                  duration: 3,
+                  ease: "power4.out",
+                  onComplete: done
+              })
+            }
+          })
+      
+        }
+      })
+    }
   },
   created() {
     this.getProducts();
   },
+  mounted(){
+    ScrollTrigger.refresh();
+  },
+  unmounted(){
+    const triggers = ScrollTrigger.getAll();
+    triggers.forEach((trigger) => {
+      // 把 ScrollTrigger 綁定的動畫消除
+        trigger.kill();
+      });
+      // 消除綁定 MatchMedia();
+    ScrollTrigger.clearMatchMedia();
+  }
 };
 </script>
 <style type="text/css" scoped>
@@ -271,9 +318,11 @@ export default {
 }
 .ldio-ei11i0en32 > div:nth-child(2) {
   border-color: transparent #666666 transparent #666666;
+  
 }
 .ldio-ei11i0en32 > div:nth-child(3) {
   border-color: transparent;
+  
 }
 .ldio-ei11i0en32 > div:nth-child(3) div {
   position: absolute;
@@ -302,12 +351,14 @@ export default {
 
 .ldio-ei11i0en32 > div:nth-child(4) {
   border-color: transparent;
+  
 }
 .ldio-ei11i0en32 > div:nth-child(4) div {
   position: absolute;
   width: 100%;
   height: 100%;
   transform: rotate(45deg);
+  
 }
 .ldio-ei11i0en32 > div:nth-child(4) div:before,
 .ldio-ei11i0en32 > div:nth-child(4) div:after {
@@ -321,11 +372,13 @@ export default {
   background: #666666;
   border-radius: 50%;
   box-shadow: 0 128px 0 0 #666666;
+  
 }
 .ldio-ei11i0en32 > div:nth-child(4) div:after {
   left: -8px;
   top: 56px;
   box-shadow: 128px 0 0 0 #666666;
+  
 }
 .loadingio-spinner-double-ring-4kp4uv8lym2 {
   width: 200px;
@@ -343,8 +396,12 @@ export default {
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
   transform-origin: 0 0; /* see note above */
+  background-color: white;
+  z-index: -6;
+  border-radius: 50%;
 }
 .ldio-ei11i0en32 div {
   box-sizing: content-box;
+  
 }
 </style>

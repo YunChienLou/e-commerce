@@ -54,7 +54,7 @@
         </tbody>
       </table>
       <div class="text-end" v-if="order.is_paid === false">
-        <button class="btn btn-danger">確認付款去</button>
+        <button class="btn btn-teslaRed">確認付款去</button>
       </div>
     </form>
   </div>

@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center">
-      <table class="table align-middle">
+    <h1 class="my-3 title">我的最愛</h1>
+    <div class="row justify-content-center mx-3" >
+      <table class="table align-middle" style="margin:10vh">
         <thead>
           <tr>
             <th>刪除</th>
@@ -12,11 +13,16 @@
         </thead>
         <tbody>
           <template v-if="favItems">
-            <tr v-for="item in favItems" :key="item.id">
+            <transition-group
+              appear
+              @before-enter="onBeforeEnter"
+              @enter="onEnter"
+            >
+            <tr v-for="(item, index) in favItems" :key="item.id" :data-index="index">
               <td>
                 <button
                   type="button"
-                  class="btn btn-outline-danger btn-sm"
+                  class="btn btn-outline-teslaRed btn-sm"
                   @click="delFavItem(item.id)"
                 >
                   <i class="bi bi-x"></i>
@@ -29,14 +35,14 @@
               <td class="text-end">
                 <button
                   type="button"
-                  class="btn btn-outline-danger"
+                  class="btn btn-outline-teslaRed"
                   :disabled="this.status.loadingItem === item.id"
                   @click="addCart(item.id)"
                 >
                   加入購物車
                   <div
                     v-if="this.status.loadingItem === item.id"
-                    class="spinner-grow text-danger spinner-grow-sm"
+                    class="spinner-grow text-teslaRed spinner-grow-sm"
                     role="status"
                   >
                     <span class="visually-hidden">Loading...</span>
@@ -45,6 +51,7 @@
                 </button>
               </td>
             </tr>
+            </transition-group>
           </template>
         </tbody>
         <tfoot>
@@ -57,6 +64,8 @@
   </div>
 </template>
 <script>
+import gsap from "gsap";
+
 export default {
   data() {
     return {
@@ -103,9 +112,32 @@ export default {
         // this.getCart();
       });
     },
+    animation(){
+      gsap.timeline()
+        .from(".title",{
+        x:-500,
+        opacity:0,
+        duration:3,
+        ease:"expo.out",
+      })
+    },
+    onBeforeEnter(el){
+      el.style.opacity=0;
+      el.style.transform="translateX(-500px)"
+    },
+    onEnter(el, done) {
+      gsap.to(el, {
+        opacity: 1,
+        x:0,
+        delay: el.dataset.index * 1,
+        onComplete: done,
+        duration:2,
+      })
+    }
   },
   mounted() {
     this.getProducts();
+    this.animation();
   },
 };
 </script>
