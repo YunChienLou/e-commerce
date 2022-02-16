@@ -12,7 +12,13 @@
   <Nav></Nav>
 
   <div class="container">
-    <h1 class="my-3 ob1">服務據點</h1>
+    <div class="my-3 ob1">
+      <div class="stack h1" style="--stacks: 3;">
+        <span style="--index: 0;">服務據點</span>
+        <span style="--index: 1;">服務據點</span>
+        <span style="--index: 2;">服務據點</span>
+      </div>
+    </div>
     <Map class="my-3 ob2" id="Map"></Map>
     <table class="table ob3">
       <thead>

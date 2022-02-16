@@ -5,6 +5,13 @@
       
       <!-- 購物車列表 -->
       <div class="col-md-6">
+        <div class="my-3 ">
+          <div class="title stack h1" style="--stacks: 3;">
+            <span style="--index: 0;">購車訂單</span>
+            <span style="--index: 1;">購車訂單</span>
+            <span style="--index: 2;">購車訂單</span>
+          </div>
+        </div>
         <Process :page="processPage"></Process>
         <div class="sticky-top">
           <table class="table align-middle">

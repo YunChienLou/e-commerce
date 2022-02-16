@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <h1 class="my-3 title">我的最愛</h1>
+    <div class="my-3 ">
+      <div class="title stack h1" style="--stacks: 3;">
+        <span style="--index: 0;">我的最愛</span>
+        <span style="--index: 1;">我的最愛</span>
+        <span style="--index: 2;">我的最愛</span>
+      </div>
+    </div>
     <div class="row justify-content-center mx-3" >
       <table class="table align-middle" style="margin:10vh">
         <thead>

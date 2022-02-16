@@ -2,7 +2,11 @@
   <Nav></Nav>
   <div class="parallax">
     <div class="text-center main-title">
-      <h1>About Us</h1>
+      <div class="title stack h1" style="--stacks: 3;">
+        <span style="--index: 0;">About Us</span>
+        <span style="--index: 1;">About Us</span>
+        <span style="--index: 2;">About Us</span>
+      </div>
       <h3>關於特斯拉</h3>
     </div>
     <img src="@/assets/tesla/parallax.jpg" class="img-fluid bg" alt="" />

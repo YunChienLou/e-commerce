@@ -15,6 +15,7 @@
         <div class="productSideNav">
           <div class="sideHeading">
             <h3>全部商品</h3>
+            
           </div>
           <ul class="sideList">
             <li class="sideItem" @click="filter = ''">全部車款</li>
@@ -41,10 +42,13 @@
         </div> -->
       </div>
       <div class="col-xl-10">
-        <div class="title">
-          <h1>所有商品</h1>
-          <div class="slash"></div>
-          <h4>{{ filter }}</h4>
+        <div class="">
+          <div class="title stack h1" style="--stacks: 3;">
+            <span style="--index: 0;">所有商品<div class="slash"></div><h4>{{ filter }}</h4></span>
+            <span style="--index: 1;">所有商品<div class="slash"></div><h4>{{ filter }}</h4></span>
+            <span style="--index: 2;">所有商品<div class="slash"></div><h4>{{ filter }}</h4></span>
+          </div>
+
         </div>
         <div class="mt-5">
           <transition-group
@@ -249,13 +253,13 @@ export default {
                   scrollTrigger:{
                     trigger: el,
                     start:"100px bottom",
-                    end:"+=300",
+                    end:"+=500",
                     invalidateOnResize:true,
                     toggleActions: "play none none reverse",
                   },
                   opacity: 1,
                   y:0,
-                  delay: el.dataset.index * 0.8,
+                  delay: 1,
                   duration: 3,
                   ease: "power4.out",
                   onComplete: done

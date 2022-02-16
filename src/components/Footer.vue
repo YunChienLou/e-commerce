@@ -27,16 +27,16 @@
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 Company">
             <h6 class="text-uppercase mb-4 font-weight-bold">Company</h6>
             <p>
-              <a class="text-white">Home</a>
+              <router-link class="text-white" to="/">Home</router-link>
             </p>
             <p>
-              <a class="text-white">About</a>
+              <router-link class="text-white" to="/about">About</router-link>
             </p>
             <p>
-              <a class="text-white">Product</a>
+              <router-link class="text-white" to="/user/product">Product</router-link>
             </p>
             <p>
-              <a class="text-white">Contact</a>
+              <router-link class="text-white" to="/contact">Contact</router-link>
             </p>
           </div>
           <!-- Grid column -->
@@ -47,13 +47,13 @@
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 Products">
             <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
             <p>
-              <a class="text-white">SUV</a>
+              <router-link class="text-white" to="/user/product">SUV</router-link>
             </p>
             <p>
-              <a class="text-white">Sedan</a>
+              <router-link class="text-white" to="/user/product">Sedan</router-link>
             </p>
             <p>
-              <a class="text-white">Sports</a>
+              <router-link class="text-white" to="/user/product">Sports</router-link>
             </p>
           </div>
 

@@ -120,19 +120,23 @@
       <div
         v-for="(item,index) in products"
         :key="item.id"
-        class="col my-3 position-relative"
+        class="col my-3 position-relative onSell"
         :data-delay="index"
+        @click="getProduct(item.id)"
       >
         <span class="badge bg-teslaRed position-absolute top-0 start-90"
           >10 % OFF</span
         >
-        <img class="mb-3 onSaleImages" :src="item.images[0]" alt="" />
+        <img class="my-3 onSaleImages" :src="item.images[0]" alt="" />
         <h3>{{ item.title }}</h3>
-        <span>NT${{ $filters.currency(item.price) }}</span>
+        <span class="mb-3 d-inline-block">NT${{ $filters.currency(item.price) }}</span>
+        <div class="glow-wrap">
+          <i class="glow"></i>
+        </div>
       </div>
       </transition-group>
     </div>
-    <button class="btn btn-teslaRed mt-5">View All Products</button>
+    <button class="btn btn-teslaRed mt-5" @click="goProductPage()">View All Products</button>
   </div>
   <div class="container px-4 py-5" id="hanging-icons">
     <h1 class="pb-2 border-bottom">服務中心</h1>
@@ -236,7 +240,7 @@ export default {
                 end:"+=300",
                 invalidateOnResize:true,
                 toggleActions: "play none none reverse",
-                markers:true,
+                // markers:true,
               },
               opacity: 0,
               y:-100,
@@ -248,6 +252,9 @@ export default {
         }
       })
       
+    },
+    goProductPage(){
+      this.$router.push("/user/product")
     }
   },
   created() {

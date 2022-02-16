@@ -3,7 +3,11 @@
     <canvas id="three">
     </canvas>
     <div class="hovertitle">
-      <p class="title h1 ob1">Tesla Modal III</p>
+      <div class="title stack ob1 h1" style="--stacks: 3;">
+        <span style="--index: 0;">Tesla Modal III</span>
+        <span style="--index: 1;">Tesla Modal III</span>
+        <span style="--index: 2;">Tesla Modal III</span>
+      </div>
       <ul class="titleSpecs">
         <li class="ob2">
           <p class="h4">Range (WLTP)</p>
@@ -18,8 +22,8 @@
           <p class="h6">6.1 Sec</p>
         </li>
       </ul>
-      <span
-        >scroll down to see more<br /><i class="fas fa-chevron-down"></i>
+      <span class="indicator">
+        scroll down to see more<br /><i class="fas fa-chevron-down"></i>
       </span>
       <div class="info">
         <p class="h4">Information</p>

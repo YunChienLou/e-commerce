@@ -45,16 +45,40 @@
           class="offcanvas-collapse navbar-collapse d-flex justify-content-center"
           id="navbarNavAltMarkup"
         >
-          <div class="navbar-nav text-center">
+          <div class="navbar-nav text-center top-0">
             <div class="row">
               <div class="col d-lg-flex">
-                <router-link to="/" class="nav-link">Home</router-link>
-                <router-link to="/about" class="nav-link">About</router-link>
+                <router-link to="/" class="nav-link">
+                <div class="stackN h1" style="--stacks: 3;">
+                      <span style="--index: 0;">Home</span>
+                      <span style="--index: 1;">Home</span>
+                      <span style="--index: 2;">Home</span>
+                </div>
+                </router-link>
+                <router-link to="/about" class="nav-link">
+                <div class="stackN h1" style="--stacks: 3;">
+                      <span style="--index: 0;">About</span>
+                      <span style="--index: 1;">About</span>
+                      <span style="--index: 2;">About</span>
+                    </div>
+                </router-link>
                 <router-link to="/user/product" class="nav-link"
-                  >Product</router-link
+                  >
+                  <div class="stackN h1" style="--stacks: 3;">
+                      <span style="--index: 0;">Product</span>
+                      <span style="--index: 1;">Product</span>
+                      <span style="--index: 2;">Product</span>
+                    </div>
+                  </router-link
                 >
                 <router-link to="/contact" class="nav-link"
-                  >Contact</router-link
+                  >
+                  <div class="stackN h1" style="--stacks: 3;">
+                      <span style="--index: 0;">Contact</span>
+                      <span style="--index: 1;">Contact</span>
+                      <span style="--index: 2;">Contact</span>
+                    </div>
+                </router-link
                 >
               </div>
             </div>
@@ -82,6 +106,8 @@
 </template>
 
 <script>
+import gsap from "gsap";
+
 export default {
   data() {
     return {
@@ -116,6 +142,34 @@ export default {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     },
+    animation(){
+      gsap.timeline()
+        .from(".ob1",{
+        x:-500,
+        opacity:0,
+        duration:1,
+        ease:"expo.out",
+        delay:0
+      }).from(".ob2",{
+        x:-500,
+        opacity:0,
+        duration:1,
+        ease:"expo.out",
+        delay:0.3
+      }).from(".ob3",{
+        x:-500,
+        opacity:0,
+        duration:1,
+        ease:"expo.out",
+        delay:0.6
+      }).from(".ob4",{
+        x:-500,
+        opacity:0,
+        duration:1,
+        ease:"expo.out",
+        delay:0.9
+      })
+    }
   },
   created() {
     this.getCart();
@@ -139,7 +193,8 @@ export default {
       } else {
         btn.style.display = "none";
       }
-    }
+    };
+    
   },
 };
 </script>
