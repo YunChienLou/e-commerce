@@ -16,9 +16,9 @@ export function table(data) {
   const tableArr = [];
   lists.forEach((element) => {
     let temp = {};
-    console.log(element);
+    // console.log(element);
     let splitArr = element.split(":");
-    console.log(splitArr);
+    // console.log(splitArr);
     temp.title = splitArr[0];
     temp.content = splitArr[1];
     tableArr.push(temp);

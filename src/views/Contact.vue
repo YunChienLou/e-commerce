@@ -13,10 +13,10 @@
 
   <div class="container">
     <div class="my-3 ob1">
-      <div class="stack h1" style="--stacks: 3;">
-        <span style="--index: 0;">服務據點</span>
-        <span style="--index: 1;">服務據點</span>
-        <span style="--index: 2;">服務據點</span>
+      <div class="stack h1" style="--stacks: 3">
+        <span style="--index: 0">服務據點</span>
+        <span style="--index: 1">服務據點</span>
+        <span style="--index: 2">服務據點</span>
       </div>
     </div>
     <Map class="my-3 ob2" id="Map"></Map>
@@ -66,7 +66,7 @@ export default {
     Footer,
     Map,
   },
-  methods:{
+  methods: {
     // beforeEnter(el){
     //   console.log("beforeEnter")
     //   el.style.opacity = 0
@@ -82,12 +82,13 @@ export default {
     //   })
     // }
   },
-  mounted(){
-    gsap.timeline()
-      .from(".ob1",{x:-500, ease:"expo.out", duration: 1, opacity: 0 })
-      .from('.ob2', {x:-1000, ease:"expo.out", duration: 1, opacity: 0 })
-      .from('.ob3', {x:-500, ease:"expo.out", duration: 1, opacity: 0 })
-  }
+  mounted() {
+    gsap
+      .timeline()
+      .from(".ob1", { x: -500, ease: "expo.out", duration: 1, opacity: 0 })
+      .from(".ob2", { x: -1000, ease: "expo.out", duration: 1, opacity: 0 })
+      .from(".ob3", { x: -500, ease: "expo.out", duration: 1, opacity: 0 });
+  },
 };
 </script>
 <style type="text/css" scoped>

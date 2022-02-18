@@ -60,8 +60,16 @@
     </form>
   </div>
   <div class="row d-flex justify-content-center mb-3">
-    <router-link class="col-3" to="/"><button class="btn btn-teslaRed form-control">回到首頁</button></router-link>
-    <router-link class="col-3" to="/user/product"><button class="btn btn-teslaRed form-control" >回到車款頁面</button></router-link>
+    <router-link class="col-3" to="/"
+      ><button class="btn btn-teslaRed form-control">
+        回到首頁
+      </button></router-link
+    >
+    <router-link class="col-3" to="/user/product"
+      ><button class="btn btn-teslaRed form-control">
+        回到車款頁面
+      </button></router-link
+    >
   </div>
 </template>
 <script>

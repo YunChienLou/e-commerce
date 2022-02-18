@@ -1,12 +1,11 @@
 <template>
   <div class="tdContainer">
-    <canvas id="three">
-    </canvas>
+    <canvas id="three"> </canvas>
     <div class="hovertitle">
-      <div class="title stack ob1 h1" style="--stacks: 3;">
-        <span style="--index: 0;">Tesla Modal III</span>
-        <span style="--index: 1;">Tesla Modal III</span>
-        <span style="--index: 2;">Tesla Modal III</span>
+      <div class="title stack ob1 h1" style="--stacks: 3">
+        <span style="--index: 0">Tesla Modal III</span>
+        <span style="--index: 1">Tesla Modal III</span>
+        <span style="--index: 2">Tesla Modal III</span>
       </div>
       <ul class="titleSpecs">
         <li class="ob2">
@@ -69,66 +68,66 @@ export default {
     this.titleAnimation();
   },
   methods: {
-    titleAnimation(){
+    titleAnimation() {
       ScrollTrigger.matchMedia({
-        "all":() => {
-          gsap.from(".ob1",{
-            scrollTrigger:{
-              start:"top center",
-              end:"bottom bottom",
-              invalidateOnResize:true,
+        all: () => {
+          gsap.from(".ob1", {
+            scrollTrigger: {
+              start: "top center",
+              end: "bottom bottom",
+              invalidateOnResize: true,
               toggleActions: "play none none reverse",
-              markers:true,
+              // markers: true,
             },
-            x:-400,
-            duration:2,
-            opacity:0,
+            x: -400,
+            duration: 2,
+            opacity: 0,
             ease: "power4.out",
           });
-          gsap.from(".ob2",{
-            scrollTrigger:{
-              start:"top center",
-              end:"bottom bottom",
-              invalidateOnResize:true,
+          gsap.from(".ob2", {
+            scrollTrigger: {
+              start: "top center",
+              end: "bottom bottom",
+              invalidateOnResize: true,
               toggleActions: "play none none reverse",
-              markers:true,
+              // markers: true,
             },
-            x:-400,
-            duration:2,
-            opacity:0,
+            x: -400,
+            duration: 2,
+            opacity: 0,
             ease: "power4.out",
-            delay:0.5,
+            delay: 0.5,
           });
-          gsap.from(".ob3",{
-            scrollTrigger:{
-              start:"top center",
-              end:"bottom bottom",
-              invalidateOnResize:true,
+          gsap.from(".ob3", {
+            scrollTrigger: {
+              start: "top center",
+              end: "bottom bottom",
+              invalidateOnResize: true,
               toggleActions: "play none none reverse",
-              markers:true,
+              // markers: true,
             },
-            x:-400,
-            duration:2,
-            opacity:0,
+            x: -400,
+            duration: 2,
+            opacity: 0,
             ease: "power4.out",
             delay: 1,
           });
-          gsap.from(".ob4",{
-            scrollTrigger:{
-              start:"top center",
-              end:"bottom bottom",
-              invalidateOnResize:true,
+          gsap.from(".ob4", {
+            scrollTrigger: {
+              start: "top center",
+              end: "bottom bottom",
+              invalidateOnResize: true,
               toggleActions: "play none none reverse",
-              markers:true,
+              // markers: true,
             },
-            x:-400,
-            duration:2,
-            opacity:0,
+            x: -400,
+            duration: 2,
+            opacity: 0,
             ease: "power4.out",
             delay: 1.5,
           });
-        }
-      })
+        },
+      });
     },
     moveCam(x, y, z) {
       this.camPos.x = x;
@@ -246,20 +245,31 @@ export default {
           const canvas = renderer.domElement;
           camera.aspect = canvas.clientWidth / canvas.clientHeight;
           camera.updateProjectionMatrix();
-        };
-        
+        }
       }
       animate();
       function Cam() {
         const insideCam = document.getElementById("goInside");
         insideCam.addEventListener("click", () => {
           // camera.position.set(30, 50, 30);
-          gsap.to(camera.position,{x:30,y:50,z:30,duration:2,ease:"expo.out"})
+          gsap.to(camera.position, {
+            x: 30,
+            y: 50,
+            z: 30,
+            duration: 2,
+            ease: "expo.out",
+          });
         });
         const outsideCam = document.getElementById("goOutside");
         outsideCam.addEventListener("click", () => {
           // camera.position.set(-400, 150, -400);
-          gsap.to(camera.position,{x:-400,y:150,z:-400,duration:3,ease:"expo.out"})
+          gsap.to(camera.position, {
+            x: -400,
+            y: 150,
+            z: -400,
+            duration: 3,
+            ease: "expo.out",
+          });
         });
       }
       Cam();

@@ -11,7 +11,7 @@
         <!--Grid row-->
         <div class="row">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 Tesla" >
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 Tesla">
             <h6 class="text-uppercase mb-4 font-weight-bold">Tesla Inc</h6>
             <p>
               Ride With Pride.<br />
@@ -33,10 +33,14 @@
               <router-link class="text-white" to="/about">About</router-link>
             </p>
             <p>
-              <router-link class="text-white" to="/user/product">Product</router-link>
+              <router-link class="text-white" to="/user/product"
+                >Product</router-link
+              >
             </p>
             <p>
-              <router-link class="text-white" to="/contact">Contact</router-link>
+              <router-link class="text-white" to="/contact"
+                >Contact</router-link
+              >
             </p>
           </div>
           <!-- Grid column -->
@@ -47,13 +51,19 @@
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 Products">
             <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
             <p>
-              <router-link class="text-white" to="/user/product">SUV</router-link>
+              <router-link class="text-white" to="/user/product"
+                >SUV</router-link
+              >
             </p>
             <p>
-              <router-link class="text-white" to="/user/product">Sedan</router-link>
+              <router-link class="text-white" to="/user/product"
+                >Sedan</router-link
+              >
             </p>
             <p>
-              <router-link class="text-white" to="/user/product">Sports</router-link>
+              <router-link class="text-white" to="/user/product"
+                >Sports</router-link
+              >
             </p>
           </div>
 
@@ -63,9 +73,11 @@
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 Contact">
             <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-            <p><i class="fas fa-home mr-3"></i> New Taipei City, TW</p>
-            <p><i class="fas fa-envelope mr-3"></i> TeslaTaiwan@gmail.com</p>
-            <p><i class="fas fa-phone mr-3"></i> (02)-2221-3375</p>
+            <p><font-awesome-icon :icon="['fas', 'house']"/>
+                New Taipei City, TW
+            </p>
+            <p><font-awesome-icon :icon="['fas', 'envelope-open-text']"/> TeslaTaiwan@gmail.com</p>
+            <p><font-awesome-icon :icon="['fas', 'phone']"/> (02)-2221-3375</p>
           </div>
           <!-- Grid column -->
         </div>
@@ -93,31 +105,27 @@
           <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
             <!-- Facebook -->
             <a
-              class="btn btn-outline-light btn-floating m-1 text-white"
+              class="btn btn-outline-dark btn-floating m-1 text-white"
               role="button"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
+              ><font-awesome-icon :icon="['fab', 'facebook-square']"/></a>
 
             <!-- Twitter -->
             <a
-              class="btn btn-outline-light btn-floating m-1 text-white"
+              class="btn btn-outline-dark btn-floating m-1 text-white"
               role="button"
-              ><i class="fab fa-twitter"></i
-            ></a>
+              ><font-awesome-icon :icon="['fab', 'twitter-square']"/></a>
 
             <!-- Google -->
             <a
-              class="btn btn-outline-light btn-floating m-1 text-white"
+              class="btn btn-outline-dark btn-floating m-1 text-white"
               role="button"
-              ><i class="fab fa-google"></i
-            ></a>
+              ><font-awesome-icon :icon="['fab', 'google-plus-square']"/></a>
 
             <!-- Instagram -->
             <a
-              class="btn btn-outline-light btn-floating m-1 text-white"
+              class="btn btn-outline-dark btn-floating m-1 text-white"
               role="button"
-              ><i class="fab fa-instagram"></i
-            ></a>
+              ><font-awesome-icon :icon="['fab', 'instagram-square']"/></a>
           </div>
           <!-- Grid column -->
         </div>
@@ -140,13 +148,13 @@ export default {
       // tesla: this.$refs.Tesla
     };
   },
-  methods:{
-    footerAnimate(){
+  methods: {
+    footerAnimate() {
       ScrollTrigger.matchMedia({
         "(min-width: 768px)": () => {
           gsap.from(".Tesla", {
             scrollTrigger: {
-              trigger: '.Tesla',
+              trigger: ".Tesla",
               start: "200px bottom",
               end: "200px bottom",
               invalidateOnResize: true,
@@ -157,11 +165,11 @@ export default {
             duration: 1,
             ease: "power4.out",
             scale: 0.5,
-            opacity:0,
+            opacity: 0,
           });
           gsap.from(".Company", {
             scrollTrigger: {
-              trigger: '.Company',
+              trigger: ".Company",
               toggleActions: "play none none reverse",
               invalidateOnResize: true,
               start: "200px bottom",
@@ -172,12 +180,12 @@ export default {
             ease: "power4.out",
             y: -200,
             // scale: 0.5,
-            delay:0.5,
-            opacity:0,
+            delay: 0.5,
+            opacity: 0,
           });
           gsap.from(".Copyright", {
             scrollTrigger: {
-              trigger: '.Copyright',
+              trigger: ".Copyright",
               toggleActions: "play none none reverse",
               invalidateOnResize: true,
               start: "200px bottom",
@@ -189,11 +197,11 @@ export default {
             y: -400,
             // scale: 0.5,
             delay: 2,
-            opacity:0,
+            opacity: 0,
           });
           gsap.from(".Products", {
             scrollTrigger: {
-              trigger: '.Products',
+              trigger: ".Products",
               toggleActions: "play none none reverse",
               invalidateOnResize: true,
               start: "200px bottom",
@@ -204,12 +212,12 @@ export default {
             ease: "power4.out",
             y: -200,
             // scale: 0.5,
-            delay:1,
-            opacity:0,
+            delay: 1,
+            opacity: 0,
           });
           gsap.from(".Contact", {
             scrollTrigger: {
-              trigger: '.Contact',
+              trigger: ".Contact",
               toggleActions: "play none none reverse",
               invalidateOnResize: true,
               start: "200px bottom",
@@ -220,30 +228,29 @@ export default {
             ease: "power4.out",
             y: -200,
             // scale: 0.5,
-            delay:1.5,
-            opacity:0,
+            delay: 1.5,
+            opacity: 0,
           });
         },
       });
-
-    }
+    },
   },
-  mounted(){
+  mounted() {
     ScrollTrigger.refresh();
-    this.footerAnimate()
+    this.footerAnimate();
     // gsap.timeline
     //   .from(".ob1",{x:-500, ease:"expo.out", duration: 1, opacity: 0 })
     //   .from('.ob2', {x:-1000, ease:"expo.out", duration: 1, opacity: 0 })
     //   .from('.ob3', {x:-500, ease:"expo.out", duration: 1, opacity: 0 })
   },
-  unmounted(){
+  unmounted() {
     const triggers = ScrollTrigger.getAll();
     triggers.forEach((trigger) => {
       // 把 ScrollTrigger 綁定的動畫消除
-        trigger.kill();
-      });
-      // 消除綁定 MatchMedia();
+      trigger.kill();
+    });
+    // 消除綁定 MatchMedia();
     ScrollTrigger.clearMatchMedia();
-  }
+  },
 };
 </script>

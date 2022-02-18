@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index:1000;">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
         <img src="@/assets/logo.svg" alt="logo" width="100" />
@@ -11,7 +11,7 @@
           class="nav-link position-relative"
           :class="{ disabled: numCart === 0 }"
         >
-          <i class="fas fa-shopping-cart"></i>
+          <font-awesome-icon :icon="['fas', 'cart-shopping']"/>
           <span
             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-teslaRed"
           >
@@ -24,7 +24,8 @@
           :class="{ disabled: numFavItems === 0 }"
           class="nav-link position-relative"
         >
-          <i class="fas fa-bookmark"></i>
+          <font-awesome-icon :icon="['fas', 'bookmark']"/>
+
           <span
             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-teslaRed"
           >
@@ -45,41 +46,44 @@
           class="offcanvas-collapse navbar-collapse d-flex justify-content-center"
           id="navbarNavAltMarkup"
         >
+          <button
+            class="navbar-toggler exit"
+            type="button"
+            @click="exitNav()"
+          >
+            <h1>X</h1>
+          </button>
           <div class="navbar-nav text-center top-0">
             <div class="row">
               <div class="col d-lg-flex">
                 <router-link to="/" class="nav-link">
-                <div class="stackN h1" style="--stacks: 3;">
-                      <span style="--index: 0;">Home</span>
-                      <span style="--index: 1;">Home</span>
-                      <span style="--index: 2;">Home</span>
-                </div>
+                  <div class="stackN h1" style="--stacks: 3">
+                    <span style="--index: 0">Home</span>
+                    <span style="--index: 1">Home</span>
+                    <span style="--index: 2">Home</span>
+                  </div>
                 </router-link>
                 <router-link to="/about" class="nav-link">
-                <div class="stackN h1" style="--stacks: 3;">
-                      <span style="--index: 0;">About</span>
-                      <span style="--index: 1;">About</span>
-                      <span style="--index: 2;">About</span>
-                    </div>
+                  <div class="stackN h1" style="--stacks: 3">
+                    <span style="--index: 0">About</span>
+                    <span style="--index: 1">About</span>
+                    <span style="--index: 2">About</span>
+                  </div>
                 </router-link>
-                <router-link to="/user/product" class="nav-link"
-                  >
-                  <div class="stackN h1" style="--stacks: 3;">
-                      <span style="--index: 0;">Product</span>
-                      <span style="--index: 1;">Product</span>
-                      <span style="--index: 2;">Product</span>
-                    </div>
-                  </router-link
-                >
-                <router-link to="/contact" class="nav-link"
-                  >
-                  <div class="stackN h1" style="--stacks: 3;">
-                      <span style="--index: 0;">Contact</span>
-                      <span style="--index: 1;">Contact</span>
-                      <span style="--index: 2;">Contact</span>
-                    </div>
-                </router-link
-                >
+                <router-link to="/user/product" class="nav-link">
+                  <div class="stackN h1" style="--stacks: 3">
+                    <span style="--index: 0">Product</span>
+                    <span style="--index: 1">Product</span>
+                    <span style="--index: 2">Product</span>
+                  </div>
+                </router-link>
+                <router-link to="/contact" class="nav-link">
+                  <div class="stackN h1" style="--stacks: 3">
+                    <span style="--index: 0">Contact</span>
+                    <span style="--index: 1">Contact</span>
+                    <span style="--index: 2">Contact</span>
+                  </div>
+                </router-link>
               </div>
             </div>
           </div>
@@ -91,10 +95,11 @@
     type="button"
     class="btn btn-teslaRed btn-floating btn-lg"
     id="btn-back-to-top"
-    style="position: fixed; bottom: 20px; right: 20px"
+    style="position: fixed; bottom: 20px; right: 20px;z-index:5;"
     @click="backTotop"
   >
-    <i class="fas fa-arrow-up"></i>
+    <font-awesome-icon :icon="['fas', 'angle-up']"/>
+
   </button>
   <!-- <button
         type="button"
@@ -129,6 +134,10 @@ export default {
     },
   },
   methods: {
+    exitNav(){
+      const navCollapse = document.getElementById('navbarNavAltMarkup');
+      navCollapse.classList.remove('open');
+    },
     getCart() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.isLoading = true;
@@ -142,34 +151,38 @@ export default {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
     },
-    animation(){
-      gsap.timeline()
-        .from(".ob1",{
-        x:-500,
-        opacity:0,
-        duration:1,
-        ease:"expo.out",
-        delay:0
-      }).from(".ob2",{
-        x:-500,
-        opacity:0,
-        duration:1,
-        ease:"expo.out",
-        delay:0.3
-      }).from(".ob3",{
-        x:-500,
-        opacity:0,
-        duration:1,
-        ease:"expo.out",
-        delay:0.6
-      }).from(".ob4",{
-        x:-500,
-        opacity:0,
-        duration:1,
-        ease:"expo.out",
-        delay:0.9
-      })
-    }
+    animation() {
+      gsap
+        .timeline()
+        .from(".ob1", {
+          x: -500,
+          opacity: 0,
+          duration: 1,
+          ease: "expo.out",
+          delay: 0,
+        })
+        .from(".ob2", {
+          x: -500,
+          opacity: 0,
+          duration: 1,
+          ease: "expo.out",
+          delay: 0.3,
+        })
+        .from(".ob3", {
+          x: -500,
+          opacity: 0,
+          duration: 1,
+          ease: "expo.out",
+          delay: 0.6,
+        })
+        .from(".ob4", {
+          x: -500,
+          opacity: 0,
+          duration: 1,
+          ease: "expo.out",
+          delay: 0.9,
+        });
+    },
   },
   created() {
     this.getCart();
@@ -193,8 +206,7 @@ export default {
       } else {
         btn.style.display = "none";
       }
-    };
-    
+    }
   },
 };
 </script>

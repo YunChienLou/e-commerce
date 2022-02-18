@@ -8,7 +8,6 @@
 <script>
 import "bootstrap/dist/js/bootstrap.bundle";
 export default {
-
   // mounted(){
   //   function scrollbar(){
   //     const body = document.body

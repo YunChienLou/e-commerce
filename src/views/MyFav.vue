@@ -1,14 +1,14 @@
 <template>
   <div class="container">
-    <div class="my-3 ">
-      <div class="title stack h1" style="--stacks: 3;">
-        <span style="--index: 0;">我的最愛</span>
-        <span style="--index: 1;">我的最愛</span>
-        <span style="--index: 2;">我的最愛</span>
+    <div class="my-3">
+      <div class="title stack h1" style="--stacks: 3">
+        <span style="--index: 0">我的最愛</span>
+        <span style="--index: 1">我的最愛</span>
+        <span style="--index: 2">我的最愛</span>
       </div>
     </div>
-    <div class="row justify-content-center mx-3" >
-      <table class="table align-middle" style="margin:10vh">
+    <div class="row justify-content-center mx-3">
+      <table class="table align-middle" style="margin: 10vh">
         <thead>
           <tr>
             <th>刪除</th>
@@ -24,39 +24,43 @@
               @before-enter="onBeforeEnter"
               @enter="onEnter"
             >
-            <tr v-for="(item, index) in favItems" :key="item.id" :data-index="index">
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-outline-teslaRed btn-sm"
-                  @click="delFavItem(item.id)"
-                >
-                  <i class="bi bi-x"></i>
-                </button>
-              </td>
-              <td>
-                {{ item.title }}
-              </td>
-              <td class="">NT${{ $filters.currency(item.price) }}</td>
-              <td class="text-end">
-                <button
-                  type="button"
-                  class="btn btn-outline-teslaRed"
-                  :disabled="this.status.loadingItem === item.id"
-                  @click="addCart(item.id)"
-                >
-                  加入購物車
-                  <div
-                    v-if="this.status.loadingItem === item.id"
-                    class="spinner-grow text-teslaRed spinner-grow-sm"
-                    role="status"
+              <tr
+                v-for="(item, index) in favItems"
+                :key="item.id"
+                :data-index="index"
+              >
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-teslaRed btn-sm"
+                    @click="delFavItem(item.id)"
                   >
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                  <i class="fas fa-shopping-cart"></i>
-                </button>
-              </td>
-            </tr>
+                    <i class="bi bi-x"></i>
+                  </button>
+                </td>
+                <td>
+                  {{ item.title }}
+                </td>
+                <td class="">NT${{ $filters.currency(item.price) }}</td>
+                <td class="text-end">
+                  <button
+                    type="button"
+                    class="btn btn-outline-teslaRed"
+                    :disabled="this.status.loadingItem === item.id"
+                    @click="addCart(item.id)"
+                  >
+                    加入購物車
+                    <div
+                      v-if="this.status.loadingItem === item.id"
+                      class="spinner-grow text-teslaRed spinner-grow-sm"
+                      role="status"
+                    >
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </td>
+              </tr>
             </transition-group>
           </template>
         </tbody>
@@ -118,28 +122,27 @@ export default {
         // this.getCart();
       });
     },
-    animation(){
-      gsap.timeline()
-        .from(".title",{
-        x:-500,
-        opacity:0,
-        duration:3,
-        ease:"expo.out",
-      })
+    animation() {
+      gsap.timeline().from(".title", {
+        x: -500,
+        opacity: 0,
+        duration: 3,
+        ease: "expo.out",
+      });
     },
-    onBeforeEnter(el){
-      el.style.opacity=0;
-      el.style.transform="translateX(-500px)"
+    onBeforeEnter(el) {
+      el.style.opacity = 0;
+      el.style.transform = "translateX(-500px)";
     },
     onEnter(el, done) {
       gsap.to(el, {
         opacity: 1,
-        x:0,
+        x: 0,
         delay: el.dataset.index * 1,
         onComplete: done,
-        duration:2,
-      })
-    }
+        duration: 2,
+      });
+    },
   },
   mounted() {
     this.getProducts();

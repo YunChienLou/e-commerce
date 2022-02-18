@@ -5,6 +5,7 @@
     aria-live="assertive"
     aria-atomic="true"
     ref="toast"
+    
   >
     <div class="toast-header justify-content-between">
       <div class="">

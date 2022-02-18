@@ -19,6 +19,10 @@
         <div></div>
         <div></div>
         <div class="accordion my-5" id="accordionPanelsStayOpenExample">
+          <h5 class="h5 bg-teslaRed rounded text-white p-3 fw-bold">
+            車款價格
+          </h5>
+
           <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
               <button
@@ -101,7 +105,9 @@
       </article>
       <div class="col-xl-4">
         <div class="">
-          <h5 class="h5">車款價格</h5>
+          <h5 class="h5 bg-teslaRed rounded text-white p-3 fw-bold">
+            車款價格
+          </h5>
           <div class="h5" v-if="!product.price">
             {{ product.origin_price }} 元
           </div>
@@ -129,8 +135,10 @@
         </div>
 
         <div class="my-3">
-          <h5 class="h5">相關車款</h5>
-          <table class="table">
+          <h5 class="h5 bg-teslaRed rounded text-white p-3 fw-bold">
+            相關車款
+          </h5>
+          <table class="table align-middle">
             <tbody>
               <tr v-for="item in filterData" :key="item.id" class="">
                 <th scope="row">
@@ -144,7 +152,7 @@
                 <td>{{ item.title }}</td>
                 <td>{{ item.category }}</td>
                 <td>
-                  <button type="button" class="btn btn-outline-teslaRed">
+                  <button type="button" class="btn btn-outline-teslaRed" @click="goProduct(item.id)">
                     GO
                   </button>
                 </td>
@@ -201,6 +209,9 @@ export default {
         }
       });
     },
+    goProduct(id) {
+      this.$router.push(`/user/product/${id}`);
+    },
     addToCart(id, qty = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       const cart = {
@@ -217,6 +228,9 @@ export default {
   },
   created() {
     this.id = this.$route.params.productId;
+    this.getProduct();
+  },
+  mounted() {
     this.getProduct();
   },
 };

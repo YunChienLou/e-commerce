@@ -117,26 +117,30 @@
         @before-enter="onBeforeEnter"
         @enter="onEnter"
       >
-      <div
-        v-for="(item,index) in products"
-        :key="item.id"
-        class="col my-3 position-relative onSell"
-        :data-delay="index"
-        @click="getProduct(item.id)"
-      >
-        <span class="badge bg-teslaRed position-absolute top-0 start-90"
-          >10 % OFF</span
+        <div
+          v-for="(item, index) in products"
+          :key="item.id"
+          class="col my-3 position-relative onSell"
+          :data-delay="index"
+          @click="getProduct(item.id)"
         >
-        <img class="my-3 onSaleImages" :src="item.images[0]" alt="" />
-        <h3>{{ item.title }}</h3>
-        <span class="mb-3 d-inline-block">NT${{ $filters.currency(item.price) }}</span>
-        <div class="glow-wrap">
-          <i class="glow"></i>
+          <span class="badge bg-teslaRed position-absolute top-0 start-90"
+            >10 % OFF</span
+          >
+          <img class="my-3 onSaleImages" :src="item.images[0]" alt="" />
+          <h3>{{ item.title }}</h3>
+          <span class="mb-3 d-inline-block"
+            >NT${{ $filters.currency(item.price) }}</span
+          >
+          <div class="glow-wrap">
+            <i class="glow"></i>
+          </div>
         </div>
-      </div>
       </transition-group>
     </div>
-    <button class="btn btn-teslaRed mt-5" @click="goProductPage()">View All Products</button>
+    <button class="btn btn-teslaRed mt-5" @click="goProductPage()">
+      View All Products
+    </button>
   </div>
   <div class="container px-4 py-5" id="hanging-icons">
     <h1 class="pb-2 border-bottom">服務中心</h1>
@@ -203,7 +207,6 @@ import ThreeD from "@/components/3dModel.vue";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-
 export default {
   data() {
     return {
@@ -232,30 +235,29 @@ export default {
     onEnter(el, done) {
       gsap.registerPlugin(ScrollTrigger);
       ScrollTrigger.matchMedia({
-        "all":()=>{
-            gsap.from(el, {
-              scrollTrigger:{
-                trigger: el,
-                start:"100px bottom",
-                end:"+=300",
-                invalidateOnResize:true,
-                toggleActions: "play none none reverse",
-                // markers:true,
-              },
-              opacity: 0,
-              y:-100,
-              delay: el.dataset.delay * 0.5,
-              duration:3,
-              ease: "power4.out",
-              onComplete: done
-          })
-        }
-      })
-      
+        all: () => {
+          gsap.from(el, {
+            scrollTrigger: {
+              trigger: el,
+              start: "100px bottom",
+              end: "+=300",
+              invalidateOnResize: true,
+              toggleActions: "play none none reverse",
+              // markers:true,
+            },
+            opacity: 0,
+            y: -100,
+            delay: el.dataset.delay * 0.5,
+            duration: 3,
+            ease: "power4.out",
+            onComplete: done,
+          });
+        },
+      });
     },
-    goProductPage(){
-      this.$router.push("/user/product")
-    }
+    goProductPage() {
+      this.$router.push("/user/product");
+    },
   },
   created() {
     console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH);

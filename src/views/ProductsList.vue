@@ -15,7 +15,6 @@
         <div class="productSideNav">
           <div class="sideHeading">
             <h3>全部商品</h3>
-            
           </div>
           <ul class="sideList">
             <li class="sideItem" @click="filter = ''">全部車款</li>
@@ -43,12 +42,23 @@
       </div>
       <div class="col-xl-10">
         <div class="">
-          <div class="title stack h1" style="--stacks: 3;">
-            <span style="--index: 0;">所有商品<div class="slash"></div><h4>{{ filter }}</h4></span>
-            <span style="--index: 1;">所有商品<div class="slash"></div><h4>{{ filter }}</h4></span>
-            <span style="--index: 2;">所有商品<div class="slash"></div><h4>{{ filter }}</h4></span>
+          <div class="title stack h1" style="--stacks: 3">
+            <span style="--index: 0"
+              >所有商品
+              <div class="slash"></div>
+              <h4>{{ filter }}</h4></span
+            >
+            <span style="--index: 1"
+              >所有商品
+              <div class="slash"></div>
+              <h4>{{ filter }}</h4></span
+            >
+            <span style="--index: 2"
+              >所有商品
+              <div class="slash"></div>
+              <h4>{{ filter }}</h4></span
+            >
           </div>
-
         </div>
         <div class="mt-5">
           <transition-group
@@ -56,89 +66,91 @@
             @enter="listEnter"
             :css="false"
           >
-          <div
-            class="card mb-3"
-            style="max-width: 900px"
-            v-for="(item,index) in filterData"
-            :key="item.id"
-            :data-index="index"
-            
-          >
-            <div>
-              <img
-                :src="item.images[0]"
-                class="img-fluid rounded-start"
-                alt="..."
-                @click="getProduct(item.id)"
-              />
-              <div class="card-body">
-                <div class="row d-flex mb-3">
-                  <h1 class="align-center">
-                    {{ item.title }}
-                    <span class="badge bg-teslaRed mx-3">{{
-                      item.category
-                    }}</span>
-                  </h1>
-                </div>
-                <div class="row mb-3 mx-2">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">性能指標</th>
-                        <th scope="col">參數</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr
-                        v-for="(object, index) in $para.table(item.description)"
-                        :key="index"
-                      >
-                        <th scope="row">{{ index + 1 }}</th>
-                        <td>{{ object.title }}</td>
-                        <td>{{ object.content }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="btn-group btn-group-xl d-flex">
-                      <button
-                        type="button"
-                        class="btn btn-outline-teslaGray"
-                        @click="addFavItem(item.id)"
-                      >
-                        <i :class="favState(item.id)"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-outline-teslaRed"
-                        :disabled="this.status.loadingItem === item.id"
-                        @click="addCart(item.id)"
-                      >
-                        <div
-                          v-if="this.status.loadingItem === item.id"
-                          class="spinner-grow text-danger spinner-grow-sm"
-                          role="status"
-                        >
-                          <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <i class="fas fa-shopping-cart"></i>
-                      </button>
-                    </div>
+            <div
+              class="card mb-3"
+              style="max-width: 900px"
+              v-for="(item, index) in filterData"
+              :key="item.id"
+              :data-index="index"
+            >
+              <div>
+                <img
+                  :src="item.images[0]"
+                  class="img-fluid rounded-start"
+                  alt="..."
+                  @click="getProduct(item.id)"
+                />
+                <div class="card-body">
+                  <div class="row d-flex mb-3">
+                    <h1 class="align-center">
+                      {{ item.title }}
+                      <span class="badge bg-teslaRed mx-3">{{
+                        item.category
+                      }}</span>
+                    </h1>
                   </div>
-                  <div class="col">
-                    <h4 class="text-center">
-                      NT${{ $filters.currency(item.price) }}
-                    </h4>
+                  <div class="row mb-3 mx-2">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">性能指標</th>
+                          <th scope="col">參數</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(object, index) in $para.table(
+                            item.description
+                          )"
+                          :key="index"
+                        >
+                          <th scope="row">{{ index + 1 }}</th>
+                          <td>{{ object.title }}</td>
+                          <td>{{ object.content }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="btn-group btn-group-xl d-flex">
+                        <button
+                          type="button"
+                          class="btn btn-outline-teslaGray"
+                          @click.prevent="addFavItem(item.id)"
+                        >
+                          <font-awesome-icon :icon="[favState(item.id), 'bookmark']"/>
+
+                        </button>
+                        <button
+                          type="button"
+                          class="btn btn-outline-teslaRed"
+                          :disabled="this.status.loadingItem === item.id"
+                          @click="addCart(item.id)"
+                        >
+                          <div
+                            v-if="this.status.loadingItem === item.id"
+                            class="spinner-grow text-danger spinner-grow-sm"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                          <font-awesome-icon :icon="['fas', 'cart-shopping']"/>
+
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <h4 class="text-center">
+                        NT${{ $filters.currency(item.price) }}
+                      </h4>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           </transition-group>
-          
         </div>
       </div>
     </div>
@@ -166,22 +178,17 @@ export default {
   computed: {
     favState() {
       return function (id) {
-        if (this.favItems.indexOf(id) > -1) {
-          return "fas fa-bookmark";
+        let favs = this.favItems;
+        if (favs.indexOf(id) > -1) {
+          console.log(id + "yes");
+          return "fas";
         } else {
-          return "far fa-bookmark";
+          console.log(id + "nope");
+          return "far";
         }
       };
     },
-    // 無side effect 卻無法反映資料變化
-    favList() {
-      return this.products.filter((el) => {
-        return this.favItems.indexOf(el.id) > -1;
-      });
-    },
     filterData() {
-      // let newData = [];
-
       let tempData = this.products.filter((el) => {
         if (this.filter === "") {
           return this.products;
@@ -217,10 +224,11 @@ export default {
         console.log(res);
         this.status.loadingItem = "";
         this.$httpMessageState(res, "加入購物車");
-        // this.getCart();
+        
       });
     },
     addFavItem(id) {
+      console.log(this.favItems);
       let index = this.favItems.findIndex((el) => {
         return el === id;
       });
@@ -239,53 +247,52 @@ export default {
       }
       localStorage.setItem("favoriteItem", JSON.stringify(this.favItems));
     },
-    listBeforeEnter(el){
+    listBeforeEnter(el) {
       el.style.opacity = 0;
       el.style.transform = "translateY(-300px)";
     },
-    listEnter(el,done){
+    listEnter(el, done) {
       ScrollTrigger.matchMedia({
-        "all": () => {
+        all: () => {
           gsap.registerPlugin(ScrollTrigger);
           ScrollTrigger.matchMedia({
-            "all":()=>{
-                gsap.to(el, {
-                  scrollTrigger:{
-                    trigger: el,
-                    start:"100px bottom",
-                    end:"+=500",
-                    invalidateOnResize:true,
-                    toggleActions: "play none none reverse",
-                  },
-                  opacity: 1,
-                  y:0,
-                  delay: 1,
-                  duration: 3,
-                  ease: "power4.out",
-                  onComplete: done
-              })
-            }
-          })
-      
-        }
-      })
-    }
+            all: () => {
+              gsap.to(el, {
+                scrollTrigger: {
+                  trigger: el,
+                  start: "100px bottom",
+                  end: "+=500",
+                  invalidateOnResize: true,
+                  toggleActions: "play none none reverse",
+                },
+                opacity: 1,
+                y: 0,
+                delay: 1,
+                duration: 3,
+                ease: "power4.out",
+                onComplete: done,
+              });
+            },
+          });
+        },
+      });
+    },
   },
   created() {
     this.getProducts();
   },
-  mounted(){
+  mounted() {
     ScrollTrigger.refresh();
   },
-  unmounted(){
+  unmounted() {
     const triggers = ScrollTrigger.getAll();
     triggers.forEach((trigger) => {
       // 把 ScrollTrigger 綁定的動畫消除
-        trigger.kill();
-      });
-      // 消除綁定 MatchMedia();
+      trigger.kill();
+    });
+    // 消除綁定 MatchMedia();
     ScrollTrigger.clearMatchMedia();
-  }
+  },
 };
 </script>
 <style type="text/css" scoped>
@@ -322,11 +329,9 @@ export default {
 }
 .ldio-ei11i0en32 > div:nth-child(2) {
   border-color: transparent #666666 transparent #666666;
-  
 }
 .ldio-ei11i0en32 > div:nth-child(3) {
   border-color: transparent;
-  
 }
 .ldio-ei11i0en32 > div:nth-child(3) div {
   position: absolute;
@@ -355,14 +360,12 @@ export default {
 
 .ldio-ei11i0en32 > div:nth-child(4) {
   border-color: transparent;
-  
 }
 .ldio-ei11i0en32 > div:nth-child(4) div {
   position: absolute;
   width: 100%;
   height: 100%;
   transform: rotate(45deg);
-  
 }
 .ldio-ei11i0en32 > div:nth-child(4) div:before,
 .ldio-ei11i0en32 > div:nth-child(4) div:after {
@@ -376,13 +379,11 @@ export default {
   background: #666666;
   border-radius: 50%;
   box-shadow: 0 128px 0 0 #666666;
-  
 }
 .ldio-ei11i0en32 > div:nth-child(4) div:after {
   left: -8px;
   top: 56px;
   box-shadow: 128px 0 0 0 #666666;
-  
 }
 .loadingio-spinner-double-ring-4kp4uv8lym2 {
   width: 200px;
@@ -406,6 +407,5 @@ export default {
 }
 .ldio-ei11i0en32 div {
   box-sizing: content-box;
-  
 }
 </style>

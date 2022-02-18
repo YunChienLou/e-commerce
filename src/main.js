@@ -10,9 +10,9 @@ import Loading from "vue3-loading-overlay";
 import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
 // bs icons
 import "bootstrap-icons/font/bootstrap-icons.css";
-// font-awesome
-import "@fortawesome/fontawesome-free/css/all.css";
-import "@fortawesome/fontawesome-free/js/all.js";
+// fontawesome-vue
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import "@/plugins/fontawsome";
 
 // GSAP ANIMATION
 import gsap from "gsap";
@@ -62,6 +62,7 @@ app.component("Form", Form);
 app.component("Field", Field);
 app.component("ErrorMessage", ErrorMessage);
 app.component("Loading", Loading);
+app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
 app.use(VueAxios, axios);
 
