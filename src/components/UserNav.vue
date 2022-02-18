@@ -112,7 +112,7 @@
 
 <script>
 import gsap from "gsap";
-
+import emitter from "@/methods/emitter";
 export default {
   data() {
     return {
@@ -133,6 +133,7 @@ export default {
       },
     },
   },
+  
   methods: {
     exitNav(){
       const navCollapse = document.getElementById('navbarNavAltMarkup');
@@ -206,7 +207,17 @@ export default {
       } else {
         btn.style.display = "none";
       }
-    }
+    };
+    emitter.on("cartChange",(method)=>{
+      console.log(method);
+      if(method == "minus"){
+        this.numCart - 1;
+        
+      }else if(method == "add"){
+        this.numCart + 1;
+        console.log(this.numCart);
+      }
+    })
   },
 };
 </script>

@@ -170,7 +170,7 @@ export default {
       status: {
         loadingItem: "",
       },
-      favItems: JSON.parse(localStorage.getItem("favoriteItem")) || [],
+      favItems: JSON.parse(localStorage.getItem("favoriteItem")) || [""],
       filter: "",
       isLoading: false,
     };
@@ -180,10 +180,10 @@ export default {
       return function (id) {
         let favs = this.favItems;
         if (favs.indexOf(id) > -1) {
-          console.log(id + "yes");
+          console.log(id + " yes");
           return "fas";
         } else {
-          console.log(id + "nope");
+          console.log(id + " nope");
           return "far";
         }
       };
@@ -224,22 +224,25 @@ export default {
         console.log(res);
         this.status.loadingItem = "";
         this.$httpMessageState(res, "加入購物車");
-        
+        emitter.emit("cartChange","add")
       });
     },
     addFavItem(id) {
       console.log(this.favItems);
+      this.status.loadingItem = id;
       let index = this.favItems.findIndex((el) => {
         return el === id;
       });
       if (this.favItems.indexOf(id) < 0) {
         this.favItems.push(id);
+        this.status.loadingItem = "";
         emitter.emit("push-message", {
           style: "success",
           title: "車款加入我的最愛",
         });
       } else {
         this.favItems.splice(index, 1);
+        this.status.loadingItem = "";
         emitter.emit("push-message", {
           style: "danger",
           title: "車款從我的最愛移除",
