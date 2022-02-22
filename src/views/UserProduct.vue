@@ -15,9 +15,12 @@
       <article class="col-xl-8">
         <h2>{{ product.title }}</h2>
         <p>{{ product.category }}</p>
-        <img :src="product.images[0]" alt="" class="img-fluid mb-3" />
-        <div></div>
-        <div></div>
+        <img :src="product.images[1]" alt="" class="img-fluid mb-3" id="expandedImg"/>
+        <div class="row d-flex">
+          <div class="col" v-for="(img,index) in product.images" :key="index">
+            <img class="img-fluid smallProductPics" :class="{activePic:index == this.active}" :src="img" alt="" @click="expandPic(img,index)" >
+          </div>
+        </div>
         <div class="accordion my-5" id="accordionPanelsStayOpenExample">
           <h5 class="h5 bg-teslaRed rounded text-white p-3 fw-bold">
             車款價格
@@ -179,6 +182,7 @@ export default {
       buyInfo:
         "下訂多久後，可以交付車輛？Tesla會通知您預計交車地點與日期，敬請與交付專員確認該日期後的三日區間內何日交付。請注意，以下更改可能會增加您的車輛交付等待時間： 1.修改訂單2.更改付款方式 3.更改車輛登記人。約定好的交付時間可以更改嗎？由於交付日期一經確認後，車輛物流與牌照登記即最後確認，故交車日期確認後不得修改。依據合約內容，最晚何時一定要交車？依據車輛整備狀況的不同，交付顧問會通知您車輛可交付的時間，您須於此時間起一週內前來Tesla 交車，詳細內容請參閱購車合約。交車後 Tesla 的窗口為何？車主服務(包含維修保養)與道路救援請撥打 24 小時免付費專線：0809-007-518。若為新訂單等相關事宜，請聯繫您的車主顧問。",
       filter: "",
+      active: 1,
     };
   },
   mixins: [getProducts],
@@ -225,12 +229,19 @@ export default {
         this.$router.push("/user/cart");
       });
     },
+    expandPic(src,index){
+      var expandImg = document.getElementById("expandedImg");
+      expandImg.src = src;
+      this.active = index;
+      console.log(this.active);
+    }
   },
   created() {
     this.id = this.$route.params.productId;
     this.getProduct();
   },
   mounted() {
+    this.id = this.$route.params.productId;
     this.getProduct();
   },
 };

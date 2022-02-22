@@ -170,7 +170,7 @@ export default {
       status: {
         loadingItem: "",
       },
-      favItems: JSON.parse(localStorage.getItem("favoriteItem")) || [""],
+      favItems: JSON.parse(localStorage.getItem("favoriteItem")) || ["",],
       filter: "",
       isLoading: false,
     };

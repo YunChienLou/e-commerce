@@ -9,6 +9,7 @@
 @import "./helpers/Home";
 @import "./helpers/Process";
 @import "./helpers/ProductsList";
+@import "./helpers/UserProduct";
 
 @mixin scrollbars(
   $size: 10px,
