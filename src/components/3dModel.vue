@@ -209,11 +209,10 @@ export default {
         color: 0x333333,
         roughness: 1,
       });
-      // let teslaTexture = new THREE.TextureLoader().load(
-      //   "@/assets/tesla_logo_PNG21.png"
-      // );
+      // 
       let floorMaterial2 = new THREE.MeshPhongMaterial({
-        map: teslaTexture,
+        color: 0x333333,
+        roughness: 1,
       });
 
       let floor = new THREE.Mesh(floorGeometry, floorMaterial);
