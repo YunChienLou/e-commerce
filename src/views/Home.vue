@@ -147,7 +147,7 @@
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
       <div class="col d-flex align-items-start">
         <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-          <i class="fas fa-oil-can"></i>
+          <font-awesome-icon :icon="['fas', 'screwdriver-wrench']"/>
         </div>
         <div>
           <h3>低成本保養</h3>
@@ -160,7 +160,7 @@
       </div>
       <div class="col d-flex align-items-start">
         <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-          <i class="fas fa-layer-group"></i>
+          <font-awesome-icon :icon="['fas', 'screwdriver-wrench']"/>
         </div>
         <div>
           <h3>管理服務</h3>
@@ -172,7 +172,7 @@
       </div>
       <div class="col d-flex align-items-start">
         <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-          <i class="fas fa-tools"></i>
+          <font-awesome-icon :icon="['fas', 'screwdriver-wrench']"/>
         </div>
         <div>
           <h3>隨時隨地的維修服務</h3>
@@ -185,7 +185,7 @@
       </div>
       <div class="col d-flex align-items-start">
         <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
-          <i class="fas fa-exclamation-circle"></i>
+          <font-awesome-icon :icon="['fas', 'circle-exclamation']"/>
         </div>
         <div>
           <h3>緊急服務</h3>

@@ -224,7 +224,7 @@ export default {
         console.log(res);
         this.status.loadingItem = "";
         this.$httpMessageState(res, "加入購物車");
-        emitter.emit("cartChange","add")
+        emitter.emit("cartChange","add");
       });
     },
     addFavItem(id) {
@@ -240,6 +240,7 @@ export default {
           style: "success",
           title: "車款加入我的最愛",
         });
+        emitter.emit("favChange","add");
       } else {
         this.favItems.splice(index, 1);
         this.status.loadingItem = "";
@@ -247,6 +248,7 @@ export default {
           style: "danger",
           title: "車款從我的最愛移除",
         });
+        emitter.emit("favChange","minus");
       }
       localStorage.setItem("favoriteItem", JSON.stringify(this.favItems));
     },

@@ -22,7 +22,8 @@
         </li>
       </ul>
       <span class="indicator">
-        scroll down to see more<br /><i class="fas fa-chevron-down"></i>
+        scroll down to see more<br /><font-awesome-icon :icon="['fas', 'angle-down']"/>
+
       </span>
       <div class="info">
         <p class="h4">Information</p>
@@ -33,7 +34,7 @@
         </p>
       </div>
       <div class="ctrl">
-        <button id="goInside" class="btn btn-teslaRed">interior</button>
+        <button id="goInside" class="btn btn-teslaRed">Interior</button>
         <button
           id="goOutside"
           class="btn btn-teslaRed"
@@ -207,12 +208,10 @@ export default {
       let floorGeometry = new THREE.PlaneGeometry(1500, 1000, 1, 1);
       let floorMaterial = new THREE.MeshStandardMaterial({
         color: 0x333333,
-        roughness: 1,
       });
       // 
       let floorMaterial2 = new THREE.MeshPhongMaterial({
         color: 0x333333,
-        roughness: 1,
       });
 
       let floor = new THREE.Mesh(floorGeometry, floorMaterial);

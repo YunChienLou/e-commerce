@@ -155,7 +155,7 @@
                 <td>{{ item.title }}</td>
                 <td>{{ item.category }}</td>
                 <td>
-                  <button type="button" class="btn btn-outline-teslaRed" @click="goProduct(item.id)">
+                  <button type="button" class="btn btn-outline-teslaRed" @click.prevent="goProduct(item.id)">
                     GO
                   </button>
                 </td>
@@ -170,6 +170,8 @@
 
 <script>
 import getProducts from "@/mixins/getProducts";
+import emitter from "@/methods/emitter";
+
 export default {
   data() {
     return {
@@ -214,6 +216,7 @@ export default {
       });
     },
     goProduct(id) {
+      console.log(id);
       this.$router.push(`/user/product/${id}`);
     },
     addToCart(id, qty = 1) {
@@ -226,14 +229,15 @@ export default {
       this.$http.post(url, { data: cart }).then((response) => {
         this.status.loadingItem = "";
         this.$httpMessageState(response, "加入購物車");
+        emitter.emit("cartChange","add");
         this.$router.push("/user/cart");
+        
       });
     },
     expandPic(src,index){
       var expandImg = document.getElementById("expandedImg");
       expandImg.src = src;
       this.active = index;
-      console.log(this.active);
     }
   },
   created() {

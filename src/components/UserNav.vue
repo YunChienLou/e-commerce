@@ -117,6 +117,7 @@ export default {
   data() {
     return {
       favItems: JSON.parse(localStorage.getItem("favoriteItem")) || [],
+      // numFavItems:0,
       numCart: 0,
       cart: {},
     };
@@ -132,6 +133,11 @@ export default {
         this.numCart = this.cart.carts.length;
       },
     },
+    // favItems: {
+    //   handler: function () {
+    //     this.numFavItems = this.favItems.length;
+    //   },
+    // },
   },
   
   methods: {
@@ -211,13 +217,25 @@ export default {
     emitter.on("cartChange",(method)=>{
       console.log(method);
       if(method == "minus"){
-        this.numCart - 1;
+        this.numCart = this.numCart - 1;
+        console.log("刪除一購物項目");
         
       }else if(method == "add"){
-        this.numCart + 1;
+        this.numCart = this.numCart + 1;
         console.log(this.numCart);
       }
-    })
+    });
+    // emitter.on("favChange",(method)=>{
+    //   console.log(method);
+    //   if(method == "minus"){
+    //     this.numFavItems = this.numFavItems - 1;
+    //     console.log("刪除一最愛項目");
+        
+    //   }else if(method == "add"){
+    //     this.numFavItems = this.numFavItems + 1;
+    //     console.log(this.numFavItems);
+    //   }
+    // });
   },
 };
 </script>

@@ -192,6 +192,7 @@
 
 <script>
 import Process from "@/components/ProcessSteps.vue";
+import emitter from "@/methods/emitter";
 export default {
   data() {
     return {
@@ -266,6 +267,7 @@ export default {
       this.isLoading = true;
       this.$http.delete(url).then((response) => {
         this.$httpMessageState(response, "移除購物車品項");
+        emitter.emit("cartChange","minus")
         this.status.loadingItem = "";
         this.getCart();
         this.isLoading = false;
