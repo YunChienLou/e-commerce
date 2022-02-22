@@ -1,6 +1,20 @@
 <template>
   <div class="tdContainer">
-    <canvas id="three"> </canvas>
+    <div class="preloader-2" id="preloader-2">
+      <div class="preloader-wrap">
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+        <span class="line line-4"></span>
+        <span class="line line-5"></span>
+        <span class="line line-6"></span>
+        <span class="line line-7"></span>
+        <span class="line line-8"></span>
+        <span class="line line-9"></span>
+        <div class="tdLoading">Loading</div>
+      </div>
+    </div>
+    <canvas id="three"></canvas>
     <div class="hovertitle">
       <div class="title stack ob1 h1" style="--stacks: 3">
         <span style="--index: 0">Tesla Modal III</span>
@@ -156,8 +170,16 @@ export default {
       // camera.position.y = 100;
       camera.position.set(this.camPos.x, this.camPos.y, this.camPos.z); // 相機位置
       camera.lookAt(scene.position); // 相機焦點
+      // 建立LOADING MANAGER
+      const loadingManager = new THREE.LoadingManager( () => {
+      const loadingScreen = document.getElementById( 'preloader-2' );
+      loadingScreen.classList.add( 'fade-out' );
+      // optional: remove loader from DOM via event listener
+      loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+      
+      } );
       //建立物體模型
-      const gltfLoader = new GLTFLoader();
+      const gltfLoader = new GLTFLoader(loadingManager);
       gltfLoader.load("/e-commerce/tesla_2018_model_3/scene.gltf", (gltf) => {
         gltf.scene.traverse(function (node) {
           if (node.isMesh) {
@@ -285,9 +307,88 @@ export default {
         }
         return needResize;
       }
+      function onTransitionEnd( event ) {
+        event.target.remove();
+      }
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.preloader-wrap{
+  position: absolute;
+  z-index: 2;
+  margin: auto 0;
+  top: 50%;
+  width: 100%;
+  height: 50%;
+}
+.preloader-2{
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: 1s opacity;
+  z-index: 2;
+  background: rgb(0, 0, 0);
+}
+
+.tdLoading {
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+.preloader-2.fade-out {
+    opacity: 0;
+}
+
+.preloader-2 .line {
+  width: 1px;
+  height: 12px;
+  background: #fff;
+  margin: 0 1px;
+  display: inline-block;
+  animation: opacity-2 1000ms infinite ease-in-out;
+}
+
+.preloader-2 .line-1 { animation-delay: 800ms; }
+.preloader-2 .line-2 { animation-delay: 600ms; }
+.preloader-2 .line-3 { animation-delay: 400ms; }
+.preloader-2 .line-4 { animation-delay: 200ms; }
+.preloader-2 .line-6 { animation-delay: 200ms; }
+.preloader-2 .line-7 { animation-delay: 400ms; }
+.preloader-2 .line-8 { animation-delay: 600ms; }
+.preloader-2 .line-9 { animation-delay: 800ms; }
+
+@keyframes opacity-1 { 
+  0% { 
+    opacity: 1;
+  }
+  50% { 
+    opacity: 0;
+  }
+  100% { 
+    opacity: 1;
+  }  
+}
+
+@keyframes opacity-2 { 
+  0% { 
+    opacity: 1;
+    height: 15px;
+  }
+  50% { 
+    opacity: 0;
+    height: 12px;
+  }
+  100% { 
+    opacity: 1;
+    height: 15px;
+  }  
+}
+</style>
