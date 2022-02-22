@@ -170,7 +170,7 @@ export default {
       status: {
         loadingItem: "",
       },
-      favItems: JSON.parse(localStorage.getItem("favoriteItem")) || ["",],
+      favItems: JSON.parse(localStorage.getItem("favoriteItem")) || [""],
       filter: "",
       isLoading: false,
     };
@@ -178,7 +178,7 @@ export default {
   computed: {
     favState() {
       return function (id) {
-        let favs = this.favItems;
+        let favs = this.favItems || [""];
         if (favs.indexOf(id) > -1) {
           console.log(id + " yes");
           return "fas";

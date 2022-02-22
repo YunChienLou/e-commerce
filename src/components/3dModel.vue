@@ -157,7 +157,7 @@ export default {
       camera.lookAt(scene.position); // 相機焦點
       //建立物體模型
       const gltfLoader = new GLTFLoader();
-      gltfLoader.load("/tesla_2018_model_3/scene.gltf", (gltf) => {
+      gltfLoader.load("/e-commerce/tesla_2018_model_3/scene.gltf", (gltf) => {
         gltf.scene.traverse(function (node) {
           if (node.isMesh) {
             node.castShadow = true;
