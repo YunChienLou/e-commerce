@@ -162,7 +162,7 @@ export default {
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = 2; // THREE.PCFSoftShadowMap
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 0.8;
+      renderer.toneMappingExposure = 1.8;
       //建立相機
       const camera = new THREE.PerspectiveCamera(
         75,
@@ -184,7 +184,7 @@ export default {
       //建立物體模型
       // /e-commerce
       const gltfLoader = new GLTFLoader(loadingManager);
-      gltfLoader.load("/e-commerce/tesla_2018_model_3/scene.gltf", (gltf) => {
+      gltfLoader.load("/tesla_2018_model_3/scene.gltf", (gltf) => {
         gltf.scene.traverse(function (node) {
           if (node.isMesh) {
             node.castShadow = true;
@@ -197,7 +197,7 @@ export default {
         scene.add(model);
       });
       //AmbientLight
-      const ambientLight = new THREE.AmbientLight(0x404040, 2);
+      const ambientLight = new THREE.AmbientLight(0x404040, 1.3);
       ambientLight.position.set(0, 200, 0);
       scene.add(ambientLight);
 
