@@ -141,6 +141,18 @@ export default {
             ease: "power4.out",
             delay: 1.5,
           });
+          gsap.fromTo(".indicator",{
+            opacity:0,
+            y:-30,
+          },
+          {
+            opacity:1,
+            y:10,
+            duration: 0.8,
+            repeat: -1,
+            yoyo:true, 
+            // repeatDelay:1
+          })
         },
       });
     },
