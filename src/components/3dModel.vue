@@ -149,20 +149,23 @@ export default {
       this.camPos.y = y;
       this.camPos.z = z;
     },
+    
     initThree() {
       // 建立場景
       const scene = new THREE.Scene();
-      // 煙霧
-      // scene.fog = new THREE.FogExp2(0x333333,0.005);
       // 背景顏色
       scene.background = new THREE.Color("#111111");
+      // scene.fog = new THREE.Fog( 0x666666, 3000, 15000 );
       //建立渲染器
       const canvas = document.querySelector("#three");
       const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-      renderer.shadowMap.enable = true;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = 2; // THREE.PCFSoftShadowMap
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 0.8;
       //建立相機
       const camera = new THREE.PerspectiveCamera(
-        50,
+        75,
         window.innerWidth / window.innerHeight,
         0.1,
         1500
@@ -179,62 +182,107 @@ export default {
       
       } );
       //建立物體模型
+      // /e-commerce
       const gltfLoader = new GLTFLoader(loadingManager);
-      gltfLoader.load("/e-commerce/tesla_2018_model_3/scene.gltf", (gltf) => {
+      gltfLoader.load("/tesla_2018_model_3/scene.gltf", (gltf) => {
         gltf.scene.traverse(function (node) {
           if (node.isMesh) {
             node.castShadow = true;
+            // node.receiveShadow = true;
+            if(node.material.map) node.material.map.anisotropy = 16;
           }
         });
-        var model = gltf.scene;
+        const model = gltf.scene;
         model.position.set(0, 0, 0);
         scene.add(model);
       });
-      // 光源設定
-      const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-      //光源等位置
-      dirLight.position.set(-10, 50, -50);
-      //可以产生阴影
-      dirLight.castShadow = true;
-      dirLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
-      scene.add(dirLight);
       //AmbientLight
-      const ambientLight = new THREE.AmbientLight(0x404040, 1);
+      const ambientLight = new THREE.AmbientLight(0x404040, 2);
       ambientLight.position.set(0, 200, 0);
-      ambientLight.castShadow = true;
       scene.add(ambientLight);
 
-      // 設置點光源 PointLight 1
-      let pointLight = new THREE.PointLight(0x404040);
-      pointLight.position.set(200, 20, -200);
-      pointLight.castShadow = true;
-      scene.add(pointLight);
-
-      // 設置點光源 PointLight 2
-      let pointLight2 = new THREE.PointLight(0x404040);
-      pointLight2.position.set(-200, 20, 300);
-      pointLight2.castShadow = true;
-      scene.add(pointLight2);
 
       // 設置聚光燈 SpotLight
-      let spotLight = new THREE.SpotLight(0xffffff, 0.2);
-      spotLight.position.set(300, 100, -200);
+      let spotLight = new THREE.SpotLight(0xffffff, 0.6);
+      spotLight.position.set(500, 500, -1000);
       spotLight.castShadow = true;
+      spotLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
+      spotLight.shadow.bias = -0.0001;
+      spotLight.shadow.camera.near = 100;
+      spotLight.shadow.camera.far = 2000;
+      // let spotLightHelper = new THREE.PointLightHelper(spotLight);
+      // scene.add(spotLightHelper);
+      // const helper2 = new THREE.CameraHelper( spotLight.shadow.camera );
+      // scene.add( helper2 );
       scene.add(spotLight);
-      let spotLight2 = new THREE.SpotLight(0xffffff, 0.2);
-      spotLight2.position.set(-300, 100, -200);
-      spotLight2.castShadow = true;
-      scene.add(spotLight2);
+      // SKY
+      var division = 20;
+      var limit = 1500;
+      var grid = new THREE.GridHelper(limit * 2, division, "#111111", "#111111");
+
+      var moveable = [];
+      for (let i = 0; i <= division; i++) {
+        moveable.push(1, 1, 0, 0); // move horizontal lines only (1 - point is moveable)
+      }
+      grid.geometry.addAttribute('moveable', new THREE.BufferAttribute(new Uint8Array(moveable), 1));
+      grid.material = new THREE.ShaderMaterial({
+        uniforms: {
+          time: {
+            value: 0
+          },
+          limits: {
+            value: new THREE.Vector2(-limit, limit)
+          },
+          speed: {
+            value: 100
+          }
+        },
+        vertexShader: `
+          uniform float time;
+          uniform vec2 limits;
+          uniform float speed;
+          
+          attribute float moveable;
+          
+          varying vec3 vColor;
+        
+          void main() {
+            vColor = color;
+            float limLen = limits.y - limits.x;
+            vec3 pos = position;
+            if (floor(moveable + 0.5) > 0.5){ // if a point has "moveable" attribute = 1 
+              float dist = speed * time;
+              float currPos = mod((pos.z + dist) - limits.x, limLen) + limits.x;
+              pos.z = currPos;
+            } 
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.0);
+          }
+        `,
+        fragmentShader: `
+          varying vec3 vColor;
+        
+          void main() {
+            gl_FragColor = vec4(vColor, 1.);
+          }
+        `,
+        vertexColors: THREE.VertexColors
+      });
+      grid.position.y = -70;
+      scene.add(grid);
+
+      var clock = new THREE.Clock();
+      var time = 0;
+      // gridHelper
 
       // 創建地板
-      let floorGeometry = new THREE.PlaneGeometry(1500, 1000, 1, 1);
+      let floorGeometry = new THREE.CircleGeometry( 1000, 3200 );
       let floorMaterial = new THREE.MeshStandardMaterial({
         color: 0x333333,
       });
       // 
-      let floorMaterial2 = new THREE.MeshPhongMaterial({
-        color: 0x333333,
-      });
+      // let floorMaterial2 = new THREE.MeshPhongMaterial({
+      //   color: 0x333333,
+      // });
 
       let floor = new THREE.Mesh(floorGeometry, floorMaterial);
       floor.rotation.x = -0.5 * Math.PI;
@@ -242,25 +290,26 @@ export default {
       floor.position.y = -70;
       scene.add(floor);
 
-      let floor2 = new THREE.Mesh(floorGeometry, floorMaterial2);
-      floor2.position.z = 500;
-      floor2.rotation.x = -1 * Math.PI;
-      floor2.receiveShadow = true;
-      scene.add(floor2);
+      // let floor2 = new THREE.Mesh(floorGeometry, floorMaterial2);
+      // floor2.position.z = 500;
+      // floor2.rotation.x = -1 * Math.PI;
+      // floor2.receiveShadow = true;
+      // scene.add(floor2);
       // 操作功能
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.maxDistance = 600;
       controls.maxPolarAngle = 1.5;
       controls.enableZoom = false;
-      // // THREE.AxesHelper
+      // THREE.AxesHelper
       // let axes = new THREE.AxesHelper(500); // 參數為座標軸長度
       // scene.add(axes);
       function animate() {
         controls.update();
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
-
+        time += clock.getDelta();
+        grid.material.uniforms.time.value = time;
         if (resizeRendererToDisplaySize(renderer)) {
           const canvas = renderer.domElement;
           camera.aspect = canvas.clientWidth / canvas.clientHeight;
